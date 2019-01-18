@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">C for NetAdmin</string>
+    <string name="tab_text_1">Subnet\nCalculator</string>
+    <string name="tab_text_2">VLSM\nCalculator</string>
+    <string name="tab_text_3">Mask\nCalculator</string>
+    <string name="action_settings">Settings</string>
+    <string name="input_label">IPv4 network address</string>
+    <string name="dot">.</string>
+    <string name="slash">/</string>
+    <string name="subnet_result">Network\t\t\t\t\t\t%1$s\nSubnet Mask\t\t\t%2$s\nHosts\t\t\t\t\t\t\t\t%3$s\nBroadcast\t\t\t\t\t%4$s\nAvailable Host\t\t\t%5$d
+                            \n\nNetwork\t\t\t\t\t\t\t%6$s\nSubnet Mask\t\t\t%7$s\nFirst Host\t\t\t\t\%8$s\nLast Host\t\t\t\t\t\%9$s\nBroadcast\t\t\t\t\t1%10$s\n</string>
+</resources>
