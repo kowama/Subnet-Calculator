@@ -13,35 +13,31 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.nimina.kowama.calculatornetadmin.algorithms.IpNetwork;
 import com.nimina.kowama.calculatornetadmin.R;
+import com.nimina.kowama.calculatornetadmin.algorithms.NetworkManager;
 
 public class SubnetFragment extends Fragment {
     private EditText[] mIpAddressEditText;
     private EditText mIpMaskEditText;
     private SeekBar mIpMaskSeekBar;
     private TextView mSubnetResultTextView;
-    private IpNetwork mIpNetwork;
+    private NetworkManager.Subnet mIpNetwork;
 
     private void updateResult(){
         try {
-            mIpNetwork = new IpNetwork(Integer.parseInt(mIpAddressEditText[0].getText().toString()),
-                    Integer.parseInt(mIpAddressEditText[1].getText().toString()),
-                    Integer.parseInt(mIpAddressEditText[2].getText().toString()),
-                    Integer.parseInt(mIpAddressEditText[3].getText().toString()),
-                    Integer.parseInt(mIpMaskEditText.getText().toString()));
+            String ipAddress =  mIpAddressEditText[0].getText().toString()+"."
+                    + mIpAddressEditText[1].getText().toString()+"."
+                    + mIpAddressEditText[2].getText().toString()+"."
+                    + mIpAddressEditText[3].getText().toString()+"/"
+                    + mIpMaskEditText.getText().toString();
 
+            mIpNetwork = new NetworkManager.Subnet(ipAddress);
             String result = String.format(getResources().getString(R.string.subnet_result),
-                    mIpNetwork.networkAddressDec(),
-                    mIpNetwork.subnetMaskDec(),
-                    mIpNetwork.Hosts(),
-                    mIpNetwork.broadcastAddressDec(),
-                    mIpNetwork.availableHost(),
-                    mIpNetwork.networkAddressBin(),
-                    mIpNetwork.subnetMaskBin(),
-                    mIpNetwork.firstHostBin(),
-                    mIpNetwork.lastHostBin(),
-                    mIpNetwork.broadcastAddressBin());
+                    mIpNetwork.address,
+                    mIpNetwork.decMask,
+                    mIpNetwork.range,
+                    mIpNetwork.broadcast,
+                    mIpNetwork.allocatedSize,"","","","","");
             mSubnetResultTextView.setText(result);
         }catch (IllegalArgumentException e){
             Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_SHORT).show();

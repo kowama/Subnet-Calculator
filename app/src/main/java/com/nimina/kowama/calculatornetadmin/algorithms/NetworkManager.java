@@ -14,6 +14,72 @@ import java.util.Map;
 
 
 public class NetworkManager {
+    public static  class Subnet {
+        public String name;
+        public int neededSize;
+        public int allocatedSize;
+        public String address;
+        public String mask;
+        public String decMask;
+        public String firstUsableHost;
+        public String lastUsableHost;
+        public String range;
+        public String broadcast;
+
+        public Subnet(){
+
+        }
+        public Subnet(String netAddress) throws IllegalArgumentException{
+            if(!checkIfValidNetworkAddress(netAddress)){
+                throw new IllegalArgumentException("netAddress not valid");
+            }
+            this.name = "A";
+            int currentIp = findFirstIp(netAddress);
+            this.address = convertIpToQuartet(currentIp);
+            this.mask = "/" + netAddress.split("/")[1];
+            this.decMask = toDecMask(Integer.parseInt(netAddress.split("/")[1]));
+            this.allocatedSize = findUsableHosts(Integer.parseInt(netAddress.split("/")[1]));
+            this.broadcast = convertIpToQuartet(currentIp + allocatedSize + 1);
+            this.firstUsableHost = convertIpToQuartet(currentIp + 1);
+            this.lastUsableHost = convertIpToQuartet(currentIp + allocatedSize);
+            this.range = firstUsableHost + " - " + lastUsableHost;
+
+
+        }
+    }
+    /**
+     * Check if a IP address is a valid network address.
+     *
+     * @param netAddress String CIDR notation
+     *                   exemple : 192.168.100.0/24
+     * @return  boolean
+     */
+    public static boolean checkIfValidNetworkAddress(String netAddress){
+        String[] ipPart = netAddress.split("/");
+        /**iPart[0]  =  A.B.C.D
+         * ipPart[1] =  mask
+         */
+        if(ipPart.length !=2){
+            return false;
+        }
+        String[] ipOctets = ipPart[0].split("\\.");
+        if(ipOctets.length != 4){
+            return false;
+        }
+
+        for (String octet : ipOctets){
+            if (Integer.parseInt(octet)<0 || Integer.parseInt(octet)>255){
+                return false;
+            }
+        }
+        if(Integer.parseInt(ipPart[1]) < 0 || Integer.parseInt(ipPart[1]) > 32 ){
+            return false;
+        }
+
+        return true;
+    }
+
+
     /**
      * Calculate VLSM.
      *
