@@ -21,7 +21,7 @@ import com.nimina.kowama.calculatornetadmin.fragments.dialog.NetConfigDialog;
 import java.util.HashMap;
 import java.util.List;
 
-public class VlsmFragment extends Fragment implements NetConfigDialog.NetConfigDialogListener {
+public class VLSMFragment extends Fragment implements NetConfigDialog.NetConfigDialogListener {
     private EditText[] mIpAddressEditText;
     private EditText mIpMaskEditText;
     private SeekBar mIpMaskSeekBar;
@@ -76,7 +76,7 @@ public class VlsmFragment extends Fragment implements NetConfigDialog.NetConfigD
     private void openNetConfigDialog(){
         NetConfigDialog netConfigDialog = new NetConfigDialog();
         netConfigDialog.show(getFragmentManager(),getString(R.string.net_conf_dialog));
-        netConfigDialog.setTargetFragment(VlsmFragment.this,1);
+        netConfigDialog.setTargetFragment(VLSMFragment.this,1);
     }
 
     private void clearAllViews(){

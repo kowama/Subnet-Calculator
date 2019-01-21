@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.nimina.kowama.calculatornetadmin.fragments.MaskFragment;
 import com.nimina.kowama.calculatornetadmin.fragments.SubnetFragment;
-import com.nimina.kowama.calculatornetadmin.fragments.VlsmFragment;
+import com.nimina.kowama.calculatornetadmin.fragments.VLSMFragment;
 
 /**
  * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -27,7 +27,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
                 return new SubnetFragment();
             }
             case 1:{
-                return new VlsmFragment();
+                return new VLSMFragment();
             }
             case 2:{
                 return new MaskFragment();
