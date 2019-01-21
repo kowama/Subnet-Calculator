@@ -75,7 +75,8 @@ public class VlsmFragment extends Fragment implements NetConfigDialog.NetConfigD
 
     private void openNetConfigDialog(){
         NetConfigDialog netConfigDialog = new NetConfigDialog();
-        netConfigDialog.show(getActivity().getSupportFragmentManager(),"Network Config Dialog");
+        netConfigDialog.show(getFragmentManager(),getString(R.string.net_conf_dialog));
+        netConfigDialog.setTargetFragment(VlsmFragment.this,1);
     }
 
     private void clearAllViews(){

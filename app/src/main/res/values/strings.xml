@@ -17,6 +17,7 @@
     <string name="button_negative">Cancel</string>
     <string name="button_positive">Calculate</string>
     <string name="label_net_conf_d_title">Configure Networks</string>
+    <string name="net_conf_dialog">net_config_dialog</string>
 
 
 </resources>

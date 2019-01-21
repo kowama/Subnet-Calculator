@@ -38,26 +38,25 @@ public class NetConfigDialog extends DialogFragment {
                     public void onClick(DialogInterface dialog, int which) {
                         // TODO: 21/01/2019
                         //fill the subnet list and send it
-                       // mSubNetsMap.put("A",110);
-                        //mSubNetsMap.put("B",60);
-                        //mSubNetsMap.put("C",60);
-                      //  mNetConfigDialogListener.applyNetworksMap(mSubNetsMap);
+                        mSubNetsMap.put("A",110);
+                        mSubNetsMap.put("B",60);
+                        mSubNetsMap.put("C",60);
+                       mNetConfigDialogListener.applyNetworksMap(mSubNetsMap);
                     }
         });
         return builder.create();
     }
 
-    /*
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         try {
-            mNetConfigDialogListener = (NetConfigDialogListener) context;
+            mNetConfigDialogListener = (NetConfigDialogListener) getTargetFragment();
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString()+ "Must implement NetConfigDialogListener");
         }
     }
-    */
     public interface  NetConfigDialogListener{
         void applyNetworksMap(HashMap<String,Integer> subNetsMap);
     }
