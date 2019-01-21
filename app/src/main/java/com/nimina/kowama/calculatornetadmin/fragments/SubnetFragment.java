@@ -13,7 +13,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.nimina.kowama.calculatornetadmin.IpNetwork;
+import com.nimina.kowama.calculatornetadmin.algorithms.IpNetwork;
 import com.nimina.kowama.calculatornetadmin.R;
 
 public class SubnetFragment extends Fragment {
@@ -106,7 +106,7 @@ public class SubnetFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
                if(s.length() > 0){
-                   if (Integer.parseInt(s.toString()) < 0 || Integer.parseInt(s.toString()) >32){
+                   if (Integer.parseInt(s.toString()) < 1 || Integer.parseInt(s.toString()) >30){
                        mIpMaskEditText.setTextColor(Color.RED);
                    }else {
                        mIpMaskEditText.setTextColor(Color.BLACK);
