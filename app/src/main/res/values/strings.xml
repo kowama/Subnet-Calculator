@@ -13,6 +13,10 @@
     <string name="label_Broadcast">Broadcast</string>
     <string name="label_netSize">Available Hosts</string>
 
+    <string name="button_configure_net"><u>CONFIGURE NETWORKS</u></string>
+    <string name="button_negative">Cancel</string>
+    <string name="button_positive">Calculate</string>
+    <string name="label_net_conf_d_title">Configure Networks</string>
 
 
 </resources>
