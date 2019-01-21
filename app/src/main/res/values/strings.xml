@@ -7,6 +7,12 @@
     <string name="input_label">IPv4 network address</string>
     <string name="dot">.</string>
     <string name="slash">/</string>
-    <string name="subnet_result">Network\t\t\t\t\t\t%1$s\nSubnet Mask\t\t\t%2$s\nHosts\t\t\t\t\t\t\t\t%3$s\nBroadcast\t\t\t\t\t%4$s\nAvailable Host\t\t\t%5$d
-                            \n\nNetwork\t\t\t\t\t\t\t%6$s\nSubnet Mask\t\t\t%7$s\nFirst Host\t\t\t\t\%8$s\nLast Host\t\t\t\t\t\%9$s\nBroadcast\t\t\t\t\t1%10$s\n</string>
+    <string name="label_network">Network</string>
+    <string name="label_subnet_mask">Subnet Mask</string>
+    <string name="label_hosts_range">Hosts Range</string>
+    <string name="label_Broadcast">Broadcast</string>
+    <string name="label_netSize">Available Hosts</string>
+
+
+
 </resources>

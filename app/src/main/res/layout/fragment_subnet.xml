@@ -103,7 +103,7 @@
             android:textSize="18sp" />
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/clearImageButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="70dp"
@@ -129,15 +129,127 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
-    <TextView
-        android:id="@+id/subnetResultTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <TableLayout
+        android:id="@+id/resultTableLayout"
+        android:layout_width="0dp"
+        android:layout_height="628dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
-        android:text="@string/subnet_result"
+        android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ipMaskSeekBar" />
+        app:layout_constraintTop_toTopOf="@+id/ipMaskSeekBar">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <TextView
+                android:id="@+id/labelNetworkTextView"
+                android:layout_width="wrap_content"
+                android:layout_column="1"
+                android:layout_gravity="fill"
+                android:text="@string/label_network" />
+
+            <TextView
+                android:id="@+id/resNetworkTextView"
+                android:layout_width="wrap_content"
+                android:layout_column="2"
+                android:layout_gravity="fill"
+                android:layout_marginLeft="20dp"
+                android:text="192.168.100.0" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <TextView
+                android:id="@+id/labelMaskTextView"
+                android:layout_width="wrap_content"
+                android:layout_column="1"
+                android:layout_gravity="fill"
+                android:text="@string/label_subnet_mask" />
+
+            <TextView
+                android:id="@+id/resMaskTextView"
+                android:layout_width="wrap_content"
+                android:layout_column="2"
+                android:layout_gravity="fill"
+                android:layout_marginLeft="20dp"
+                android:text="255.255.255.0" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <TextView
+                android:id="@+id/labelHostsRangeTextView"
+                android:layout_width="wrap_content"
+                android:layout_column="1"
+                android:layout_gravity="fill"
+                android:text="@string/label_hosts_range" />
+
+            <TextView
+                android:id="@+id/resHostsRangeTextView"
+                android:layout_width="wrap_content"
+                android:layout_column="2"
+                android:layout_gravity="fill"
+                android:layout_marginLeft="20dp"
+                android:text="192.168.100.1 - 192.168.100.255" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <TextView
+                android:id="@+id/labelBroadcastTextView"
+                android:layout_width="wrap_content"
+                android:layout_column="1"
+                android:layout_gravity="fill"
+                android:text="@string/label_Broadcast" />
+
+            <TextView
+                android:id="@+id/resBroadcastTextView"
+                android:layout_width="wrap_content"
+                android:layout_column="2"
+                android:layout_gravity="fill"
+                android:layout_marginLeft="20dp"
+                android:text="192.168.100.255" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <TextView
+                android:id="@+id/labelNetSizeTextView"
+                android:layout_width="wrap_content"
+                android:layout_column="1"
+                android:layout_gravity="fill"
+                android:text="@string/label_netSize" />
+
+            <TextView
+                android:id="@+id/resNetSizeTextView"
+                android:layout_width="wrap_content"
+                android:layout_column="2"
+                android:layout_gravity="fill"
+                android:layout_marginLeft="20dp"
+                android:text="300" />
+        </TableRow>
+
+    </TableLayout>
 
 </android.support.constraint.ConstraintLayout>
