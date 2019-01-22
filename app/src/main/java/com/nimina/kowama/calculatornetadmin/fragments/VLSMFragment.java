@@ -181,6 +181,7 @@ public class VLSMFragment extends Fragment implements NetConfigDialog.NetConfigD
         clearAllViews();
         Snackbar.make(view, "Clear", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
+        mResultListView.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -197,6 +198,8 @@ public class VLSMFragment extends Fragment implements NetConfigDialog.NetConfigD
         mResultSubNets  = NetworkManager.calcVLSM(mMajorNetwork, mSubNetsMap);
         SubnetResultAdapter subnetResultAdapter = new SubnetResultAdapter(getContext(),R.layout.subnet_result_layout,mResultSubNets);
         mResultListView.setAdapter(subnetResultAdapter);
+        mResultListView.setVisibility(View.VISIBLE);
+
     }
 
     private class SubnetResultAdapter extends ArrayAdapter<NetworkManager.Subnet>{

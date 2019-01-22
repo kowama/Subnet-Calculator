@@ -57,17 +57,15 @@ public class NetConfigDialog extends DialogFragment {
                 }).setPositiveButton(R.string.button_positive, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        for (String key : mSubNetsHashMap.keySet()){
-                            if(mSubNetsHashMap.get(key) == null || mSubNetsHashMap.get(key) < 0){
+                        for (String key : mSubNetsHashMap.keySet()) {
+                            if (mSubNetsHashMap.get(key) == null || mSubNetsHashMap.get(key) < 1) {
+                                // todo not working
                                 //Not Close Dialog
-                                Toast.makeText(getActivity().getBaseContext(),"Network config not valid !",Toast.LENGTH_SHORT);
-
-                            }else {
-                                mNetConfigDialogListener.applyNetworksMap(mSubNetsHashMap);
-
-
+                                Toast.makeText(getActivity().getBaseContext(), "Network config not valid !", Toast.LENGTH_SHORT);
+                                return;
                             }
                         }
+                        mNetConfigDialogListener.applyNetworksMap(mSubNetsHashMap);
                         MainActivity.hideSoftKeyboard(getContext());
                     }
         });
@@ -81,6 +79,7 @@ public class NetConfigDialog extends DialogFragment {
             @Override
             public void onClick(View v) {
                 mSubNetsHashMap.put("Network "+String.valueOf(mSubNetsHashMap.size()+1), null);
+                MainActivity.hideSoftKeyboard(getContext());
                 updateSubNetsHashMapListView();
             }
         });
@@ -201,7 +200,6 @@ public class NetConfigDialog extends DialogFragment {
 
                     @Override
                     public void onTextChanged(CharSequence s, int start, int before, int count) {
-
                     }
 
                     @Override
@@ -209,8 +207,7 @@ public class NetConfigDialog extends DialogFragment {
                         try {
                             if ((Integer.valueOf(s.toString()) > 0)){
                                 mData.put(name, Integer.valueOf(s.toString()));
-                                subNetNameEditText.setTextColor(Color.BLACK);
-                               // updateSubNetsHashMapListView();
+                                subNetSizeEditText.setTextColor(Color.BLACK);
 
                             }else {
                                 subNetSizeEditText.setTextColor(Color.RED);
