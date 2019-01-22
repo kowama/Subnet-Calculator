@@ -60,7 +60,8 @@ public class NetConfigDialog extends DialogFragment {
                         for (String key : mSubNetsHashMap.keySet()) {
                             if (mSubNetsHashMap.get(key) == null || mSubNetsHashMap.get(key) < 1) {
                                 // todo not working
-                                //Not Close Dialog
+                                mSubNetsHashMap.clear();
+                                mNetConfigDialogListener.applyNetworksMap(mSubNetsHashMap);
                                 Toast.makeText(getActivity().getBaseContext(), "Network config not valid !", Toast.LENGTH_SHORT);
                                 return;
                             }

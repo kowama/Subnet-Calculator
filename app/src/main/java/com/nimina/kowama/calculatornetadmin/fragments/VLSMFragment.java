@@ -9,7 +9,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +19,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nimina.kowama.calculatornetadmin.MainActivity;
 import com.nimina.kowama.calculatornetadmin.R;
@@ -245,9 +245,8 @@ public class VLSMFragment extends Fragment implements NetConfigDialog.NetConfigD
                 int percentage = (int)(((float)getItem(position).neededSize / (float)getItem(position).allocatedSize)*100);
                 currNetSizeRequiredTextView.setText(String.format(getResources().getString(R.string.res_net_size_req),getItem(position).neededSize));
                 resNetSizeAllocatedTextView.setText(String.format(getResources().getString(R.string.res_net_size_alloc),getItem(position).allocatedSize,percentage));
-            // TODO: 22/01/2019   remove
             }catch (Exception e){
-                Log.i("Exception ", e.getMessage());
+                Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
 
             }
 
