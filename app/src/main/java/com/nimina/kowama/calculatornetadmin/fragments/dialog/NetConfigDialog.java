@@ -80,7 +80,6 @@ public class NetConfigDialog extends DialogFragment {
             @Override
             public void onClick(View v) {
                 mSubNetsHashMap.put("Network "+String.valueOf(mSubNetsHashMap.size()+1), null);
-                MainActivity.hideSoftKeyboard(getContext());
                 updateSubNetsHashMapListView();
             }
         });
@@ -107,6 +106,8 @@ public class NetConfigDialog extends DialogFragment {
     private void updateSubNetsHashMapListView(){
         SubNetHashMapAdapter subNetHashMapAdapter = new SubNetHashMapAdapter(getContext(),R.layout.subnet_size_input,mSubNetsHashMap);
         mSubNetsHashMapListView.setAdapter(subNetHashMapAdapter);
+        MainActivity.hideSoftKeyboard(getContext());
+
     }
 
 
