@@ -2,10 +2,13 @@ package com.nimina.kowama.calculatornetadmin.fragments;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,8 +20,8 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.nimina.kowama.calculatornetadmin.MainActivity;
 import com.nimina.kowama.calculatornetadmin.R;
 import com.nimina.kowama.calculatornetadmin.algorithms.NetworkManager;
 import com.nimina.kowama.calculatornetadmin.fragments.dialog.NetConfigDialog;
@@ -54,6 +57,85 @@ public class VLSMFragment extends Fragment implements NetConfigDialog.NetConfigD
 
         clearAllViews();
 
+        setListenerOnEditableViews(rootView);
+
+    }
+    private void setListenerOnEditableViews(View rootView){
+        /*** ip Part A.B.C.D EditTextListener ***/
+        for (final EditText ipPartEditText : mIpAddressEditText)
+            ipPartEditText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    if(s.length() >0){
+                        if (s.length()>0 &&Integer.parseInt(s.toString()) < 0 || Integer.parseInt(s.toString()) > 255){
+                            ipPartEditText.setTextColor(Color.RED);
+                        }
+                        else{
+                            ipPartEditText.setTextColor(Color.BLACK);
+                            //OK
+                        }
+                    }
+
+                }
+            });
+        /*** ip Mask /xx EditTextListener ***/
+
+        mIpMaskEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(s.length() > 0){
+                    if (Integer.parseInt(s.toString()) < 1 || Integer.parseInt(s.toString()) >30){
+                        mIpMaskEditText.setTextColor(Color.RED);
+                    }else {
+                        mIpMaskEditText.setTextColor(Color.BLACK);
+                        mIpMaskSeekBar.setProgress(Integer.parseInt(mIpMaskEditText.getText().toString()));
+                        //OK
+                    }
+                    mIpMaskEditText.setSelection(mIpMaskEditText.getText().length());
+                }
+            }
+        });
+
+        /*** ip Mask /xx EditText binding with the SeekBar***/
+        mIpMaskSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                mIpMaskEditText.setText(String.valueOf(progress));
+                //OK
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        /*** Clear  ButtonListener ***/
         ImageButton clearImageButton = rootView.findViewById(R.id.clearImageButton);
         clearImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,14 +144,26 @@ public class VLSMFragment extends Fragment implements NetConfigDialog.NetConfigD
             }
         });
 
+        /*** OpenDialog  ButtonListener ***/
+
         Button netConfigButton = rootView.findViewById(R.id.netConfigButton);
         netConfigButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                openNetConfigDialog();
+            public void onClick(View view) {
+                mMajorNetwork = mIpAddressEditText[0].getText().toString()+"."
+                        + mIpAddressEditText[1].getText().toString()+"."
+                        + mIpAddressEditText[2].getText().toString()+"."
+                        + mIpAddressEditText[3].getText().toString()+"/"
+                        + mIpMaskEditText.getText().toString();
+                if(NetworkManager.checkIfValidNetworkAddress(mMajorNetwork)){
+                    openNetConfigDialog();
+                }else {
+                    Snackbar.make(view, "Major Network Address not valid", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
+                MainActivity.hideSoftKeyboard(getActivity());
             }
         });
-
     }
 
     private void openNetConfigDialog(){
@@ -101,10 +195,8 @@ public class VLSMFragment extends Fragment implements NetConfigDialog.NetConfigD
     @Override
     public void applyNetworksMap(HashMap<String, Integer> subNetsMap) {
         mSubNetsMap     = subNetsMap;
-        mMajorNetwork = "192.168.44.0/22";
-        NetworkManager.checkIfValidNetworkAddress(mMajorNetwork);
-        mResultSubNets  = NetworkManager.calcVLSM(mMajorNetwork, mSubNetsMap);
         // TODO: 21/01/2019
+        mResultSubNets  = NetworkManager.calcVLSM(mMajorNetwork, mSubNetsMap);
         SubnetResultAdapter subnetResultAdapter = new SubnetResultAdapter(getContext(),R.layout.subnet_result_layout,mResultSubNets);
         mResultListView.setAdapter(subnetResultAdapter);
     }
@@ -147,7 +239,7 @@ public class VLSMFragment extends Fragment implements NetConfigDialog.NetConfigD
                 TextView currNetSizeRequiredTextView  = convertView.findViewById(R.id.resNetSizeRequiredTextView);
                 TextView resNetSizeAllocatedTextView  = convertView.findViewById(R.id.resNetSizeAllocatedTextView);
 
-                currNetworkTextView.setText(getItem(position).decMask+getItem(position).maskCIDR);
+                currNetworkTextView.setText(getItem(position).address+getItem(position).maskCIDR);
                 currNetHostsRangeTextView.setText(getItem(position).range);
                 CurrNetBroadcastTextView.setText(getItem(position).broadcast);
                 int percentage = (int)(((float)getItem(position).neededSize / (float)getItem(position).allocatedSize)*100);
