@@ -193,14 +193,22 @@ public class NetConfigDialog extends DialogFragment {
 
                     @Override
                     public void afterTextChanged(Editable s) {
-                        if ((Integer.valueOf(s.toString()) > 0)){
-                            mData.put(name, Integer.valueOf(s.toString()));
-                            subNetNameEditText.setTextColor(Color.BLACK);
-                            updateSubNetsHashMapListView();
+                        try {
+                            if ((Integer.valueOf(s.toString()) > 0)){
+                                mData.put(name, Integer.valueOf(s.toString()));
+                                subNetNameEditText.setTextColor(Color.BLACK);
+                                updateSubNetsHashMapListView();
 
-                        }else {
-                            subNetSizeEditText.setTextColor(Color.RED);
+                            }else {
+                                subNetSizeEditText.setTextColor(Color.RED);
+                            }
+
+                        }catch (NumberFormatException  e){
+
+                        }catch (Exception e){
+                            Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_SHORT);
                         }
+
                     }
                 });
                 delSubNetButton.setOnClickListener(new View.OnClickListener() {
