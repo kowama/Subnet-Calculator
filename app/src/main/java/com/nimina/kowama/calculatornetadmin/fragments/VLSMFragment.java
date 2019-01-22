@@ -203,7 +203,7 @@ public class VLSMFragment extends Fragment implements NetConfigDialog.NetConfigD
     private class SubnetResultAdapter extends ArrayAdapter<NetworkManager.Subnet>{
         private Context mContext;
         private int mResource;
-        private List<NetworkManager.Subnet> mSubNetList = new ArrayList<>();
+        private List<NetworkManager.Subnet> mSubNetList;
 
         public SubnetResultAdapter(Context context, int resource,List<NetworkManager.Subnet> subNetList) {
             super(context, resource, subNetList);
@@ -227,7 +227,6 @@ public class VLSMFragment extends Fragment implements NetConfigDialog.NetConfigD
         @NonNull
         @Override
         public View getView(int position,  View convertView,  ViewGroup parent) {
-            // TODO: 21/01/2019
             LayoutInflater inflater= LayoutInflater.from(mContext);
 
             convertView = inflater.inflate(mResource,parent,false) ;

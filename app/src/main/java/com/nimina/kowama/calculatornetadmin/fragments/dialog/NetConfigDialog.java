@@ -10,14 +10,22 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ListView;
 
 import com.nimina.kowama.calculatornetadmin.R;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class NetConfigDialog extends DialogFragment {
-    HashMap<String, Integer> mSubNetsMap = new HashMap<>(); // [name: size]
+    private HashMap<String, Integer> mSubNetsHashMap = new HashMap<>(); // [name: size]
     private NetConfigDialog.NetConfigDialogListener mNetConfigDialogListener;
+    private ListView mSubNetsHashMapListView;
 
 
     @NonNull
@@ -26,6 +34,7 @@ public class NetConfigDialog extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater layoutInflater = getActivity().getLayoutInflater();
         View view = layoutInflater.inflate(R.layout.net_config_dialog, null);
+
         builder.setView(view)
                 .setTitle(R.string.label_net_conf_d_title)
                 .setNegativeButton(R.string.button_negative, new DialogInterface.OnClickListener() {
@@ -38,12 +47,17 @@ public class NetConfigDialog extends DialogFragment {
                     public void onClick(DialogInterface dialog, int which) {
                         // TODO: 21/01/2019
                         //fill the subnet list and send it
-                        mSubNetsMap.put("A",110);
-                        mSubNetsMap.put("B",60);
-                        mSubNetsMap.put("C",60);
-                       mNetConfigDialogListener.applyNetworksMap(mSubNetsMap);
+                       mNetConfigDialogListener.applyNetworksMap(mSubNetsHashMap);
                     }
         });
+
+        mSubNetsHashMap.put("A",110);
+        mSubNetsHashMap.put("B",60);
+        mSubNetsHashMap.put("C",60);
+
+        mSubNetsHashMapListView = view.findViewById(R.id.subNetHashMapListView);
+        SubNetHashMapAdapter subNetHashMapAdapter = new SubNetHashMapAdapter(getContext(),R.layout.subnet_size_input,mSubNetsHashMap);
+        mSubNetsHashMapListView.setAdapter(subNetHashMapAdapter);
         return builder.create();
     }
 
@@ -60,4 +74,66 @@ public class NetConfigDialog extends DialogFragment {
     public interface  NetConfigDialogListener{
         void applyNetworksMap(HashMap<String,Integer> subNetsMap);
     }
+
+
+
+    private class SubNetHashMapAdapter extends BaseAdapter {
+        private Context mContext;
+        private HashMap<String, Integer> mData;
+        private String[] mKeys;
+        private int mResource;
+
+        public SubNetHashMapAdapter(Context context, int resource,HashMap<String, Integer> data){
+            mContext = context;
+            mData    = data;
+            mResource = resource;
+            mKeys    = mData.keySet().toArray(new String[data.size()]);
+        }
+
+        @Override
+        public int getCount() {
+            return mData.size();
+        }
+
+        @Override
+        public Integer getItem(int position) {
+            return mData.get(mKeys[position]);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int pos, View convertView, ViewGroup parent) {
+            LayoutInflater inflater= LayoutInflater.from(mContext);
+
+            convertView = inflater.inflate(mResource,parent,false) ;
+            try {
+                EditText subNetNameEditText       = convertView.findViewById(R.id.subNetNameEditText);
+                EditText subNetSizeEditText       = convertView.findViewById(R.id.subNetSizeEditText);
+                ImageButton delSubNetButton       = convertView.findViewById(R.id.delSubNetButton);
+
+                final String name = mKeys[pos];
+                Integer size = getItem(pos);
+
+                subNetNameEditText.setText(name);
+                subNetSizeEditText.setText(String.valueOf(size));
+
+                delSubNetButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mData.remove(name);
+                    }
+                });
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+            return convertView;
+        }
+    }
+
 }

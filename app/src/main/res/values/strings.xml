@@ -22,7 +22,7 @@
     <string name="label_net_conf_d_title">Configure Networks</string>
     <string name="net_conf_dialog">net_config_dialog</string>
 
-    <string name="hint_net_size">Network Size</string>
+    <string name="hint_net_size">Size</string>
 
 
 </resources>
