@@ -42,7 +42,6 @@ public class VLSMFragment extends Fragment implements NetConfigDialog.NetConfigD
     private String mMajorNetwork;
 
 
-
     private void initViews(View rootView){
         mIpAddressEditText = new EditText[4];
         mIpAddressEditText[0] = rootView.findViewById(R.id.ipPartAEditText);

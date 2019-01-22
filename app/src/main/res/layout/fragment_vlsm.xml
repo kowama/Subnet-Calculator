@@ -109,9 +109,8 @@
             android:layout_marginLeft="70dp"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:background="@color/light_gray"
             android:minWidth="80dp"
-            android:src="@android:drawable/ic_menu_delete" />
+            android:src="@drawable/ic_delete_blue_24dp" />
 
     </LinearLayout>
 

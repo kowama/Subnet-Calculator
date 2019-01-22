@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+
+    <EditText
+        android:id="@+id/subNetNameEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxWidth="200dp"
+        android:layout_alignParentLeft="true"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:maxLength="20"
+        android:text="network A" />
+
+    <EditText
+        android:id="@+id/subNetSizeEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@id/subNetNameEditText"
+        android:layout_toLeftOf="@id/delSubNetButton"
+        android:ems="10"
+        android:maxLength="10"
+        android:hint="@string/hint_net_size"
+        android:inputType="numberDecimal" />
+
+    <ImageButton
+        android:id="@+id/delSubNetButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:minWidth="60dp"
+        android:src="@drawable/ic_delete_black_24dp" />
+</RelativeLayout>
