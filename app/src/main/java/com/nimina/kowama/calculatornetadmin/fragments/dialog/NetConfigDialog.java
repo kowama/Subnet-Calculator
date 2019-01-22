@@ -4,11 +4,14 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +21,7 @@ import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.nimina.kowama.calculatornetadmin.R;
 
@@ -147,25 +151,68 @@ public class NetConfigDialog extends DialogFragment {
 
             convertView = inflater.inflate(mResource,parent,false) ;
             try {
-                EditText subNetNameEditText       = convertView.findViewById(R.id.subNetNameEditText);
-                EditText subNetSizeEditText       = convertView.findViewById(R.id.subNetSizeEditText);
+                final EditText subNetNameEditText       = convertView.findViewById(R.id.subNetNameEditText);
+                final EditText subNetSizeEditText       = convertView.findViewById(R.id.subNetSizeEditText);
                 ImageButton delSubNetButton       = convertView.findViewById(R.id.delSubNetButton);
 
                 final String name = mKeys[pos];
-                Integer size = getItem(pos);
+                final Integer size = getItem(pos);
 
                 subNetNameEditText.setText(name);
                 subNetSizeEditText.setText(String.valueOf(size));
 
+                /** Listener **/
+                subNetNameEditText.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        mData.remove(name);
+                        mData.put(s.toString(),size);
+                        updateSubNetsHashMapListView();
+                    }
+                });
+                subNetSizeEditText.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        if ((Integer.valueOf(s.toString()) > 0)){
+                            mData.put(name, Integer.valueOf(s.toString()));
+                            subNetNameEditText.setTextColor(Color.BLACK);
+                            updateSubNetsHashMapListView();
+
+                        }else {
+                            subNetSizeEditText.setTextColor(Color.RED);
+                        }
+                    }
+                });
                 delSubNetButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         mData.remove(name);
+                        updateSubNetsHashMapListView();
                     }
                 });
 
             }catch (Exception e){
-                e.printStackTrace();
+                Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
             }
 
             return convertView;
