@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +27,7 @@ public class NetConfigDialog extends DialogFragment {
     private HashMap<String, Integer> mSubNetsHashMap = new HashMap<>(); // [name: size]
     private NetConfigDialog.NetConfigDialogListener mNetConfigDialogListener;
     private ListView mSubNetsHashMapListView;
+    private FloatingActionButton mAddSubNetFloatingActionButton;
 
 
     @NonNull
@@ -51,14 +53,30 @@ public class NetConfigDialog extends DialogFragment {
                     }
         });
 
-        mSubNetsHashMap.put("A",110);
-        mSubNetsHashMap.put("B",60);
-        mSubNetsHashMap.put("C",60);
+        /*** init ***/
+        mSubNetsHashMapListView        = view.findViewById(R.id.subNetHashMapListView);
+        mAddSubNetFloatingActionButton = view.findViewById(R.id.addSubNetFloatingActionButton);
 
-        mSubNetsHashMapListView = view.findViewById(R.id.subNetHashMapListView);
+        /*** listener ***/
+        mAddSubNetFloatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mSubNetsHashMap.put("Network "+String.valueOf(mSubNetsHashMap.size()+1), null);
+                updateSubNetsHashMapListView();
+            }
+        });
+
+        /**initial subnet **/
+        mSubNetsHashMap.put("Network 1",110);
+        mSubNetsHashMap.put("Network 2",60);
+        mSubNetsHashMap.put("Network 3",60);
+        updateSubNetsHashMapListView();
+
+        return builder.create();
+    }
+    private void updateSubNetsHashMapListView(){
         SubNetHashMapAdapter subNetHashMapAdapter = new SubNetHashMapAdapter(getContext(),R.layout.subnet_size_input,mSubNetsHashMap);
         mSubNetsHashMapListView.setAdapter(subNetHashMapAdapter);
-        return builder.create();
     }
 
 
