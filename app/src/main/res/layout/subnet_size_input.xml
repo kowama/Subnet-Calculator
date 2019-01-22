@@ -2,7 +2,8 @@
 <TableRow xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white">
+    android:background="@color/white"
+    >
 
     <EditText
         android:id="@+id/subNetNameEditText"
@@ -10,12 +11,12 @@
         android:layout_height="wrap_content"
         android:layout_column="0"
         android:layout_span="2"
-        android:inputType="textPersonName"
+        android:background="@color/white"
+        android:hint="@string/network_name"
+        android:inputType="none"
         android:maxLength="20"
         android:minEms="10"
-        android:background="@color/white"
-        android:text="network A"
-        android:textSize="14dp" />
+        android:textSize="14sp" />
 
         <EditText
             android:id="@+id/subNetSizeEditText"
@@ -25,12 +26,13 @@
             android:maxLength="10"
             android:hint="@string/hint_net_size"
             android:layout_column="2"
-            android:textSize="14dp"
+            android:textSize="14sp"
             android:inputType="numberDecimal" />
 
         <ImageButton
             android:id="@+id/delSubNetButton"
             android:layout_width="wrap_content"
+            android:contentDescription="@string/delete_net_button"
             android:layout_height="wrap_content"
             android:layout_column="3"
             android:layout_span="1"

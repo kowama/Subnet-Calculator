@@ -23,6 +23,8 @@
     <string name="net_conf_dialog">net_config_dialog</string>
 
     <string name="hint_net_size">Size</string>
+    <string name="delete_net_button">delete net button</string>
+    <string name="network_name">network name</string>
 
 
 </resources>

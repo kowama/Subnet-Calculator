@@ -12,6 +12,7 @@ import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
@@ -22,6 +23,8 @@ import com.nimina.kowama.calculatornetadmin.R;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+
+import static android.view.WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
 
 public class NetConfigDialog extends DialogFragment {
     private HashMap<String, Integer> mSubNetsHashMap = new HashMap<>(); // [name: size]
@@ -47,9 +50,14 @@ public class NetConfigDialog extends DialogFragment {
                 }).setPositiveButton(R.string.button_positive, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // TODO: 21/01/2019
-                        //fill the subnet list and send it
-                       mNetConfigDialogListener.applyNetworksMap(mSubNetsHashMap);
+                        for (String key : mSubNetsHashMap.keySet()){
+                            try {
+
+                                mNetConfigDialogListener.applyNetworksMap(mSubNetsHashMap);
+                            }catch (Exception e){
+
+                            }
+                        }
                     }
         });
 
@@ -66,13 +74,23 @@ public class NetConfigDialog extends DialogFragment {
             }
         });
 
-        /**initial subnet **/
-        mSubNetsHashMap.put("Network 1",110);
-        mSubNetsHashMap.put("Network 2",60);
-        mSubNetsHashMap.put("Network 3",60);
-        updateSubNetsHashMapListView();
 
-        return builder.create();
+        /**initial subnet **/
+        mSubNetsHashMap.put("Network 1",null);
+        updateSubNetsHashMapListView();
+        final Dialog dialog = builder.create();
+
+        mSubNetsHashMapListView.post(new Runnable() {
+
+            @Override
+            public void run() {
+                dialog.getWindow().clearFlags(
+                        WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE |
+                                WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+            }
+        });
+
+        return dialog;
     }
     private void updateSubNetsHashMapListView(){
         SubNetHashMapAdapter subNetHashMapAdapter = new SubNetHashMapAdapter(getContext(),R.layout.subnet_size_input,mSubNetsHashMap);
