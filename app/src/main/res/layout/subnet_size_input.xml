@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableRow xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-        <EditText
-            android:id="@+id/subNetNameEditText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:maxLength="20"
-            android:layout_column="0"
-            android:layout_span="2"
-            android:minEms="10"
-            android:textSize="14dp"
-            android:text="network A" />
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <EditText
+        android:id="@+id/subNetNameEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_column="0"
+        android:layout_span="2"
+        android:inputType="textPersonName"
+        android:maxLength="20"
+        android:minEms="10"
+        android:background="@color/white"
+        android:text="network A"
+        android:textSize="14dp" />
 
         <EditText
             android:id="@+id/subNetSizeEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:minEms="5"
+            android:minEms="3"
             android:maxLength="10"
             android:hint="@string/hint_net_size"
             android:layout_column="2"
