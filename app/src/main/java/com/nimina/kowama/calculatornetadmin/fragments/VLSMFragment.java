@@ -1,5 +1,6 @@
 package com.nimina.kowama.calculatornetadmin.fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -131,6 +132,7 @@ public class VLSMFragment extends Fragment implements NetConfigDialog.NetConfigD
             return mSubNetList.get(position);
         }
 
+        @SuppressLint("StringFormatInvalid")
         @NonNull
         @Override
         public View getView(int position,  View convertView,  ViewGroup parent) {
@@ -140,16 +142,18 @@ public class VLSMFragment extends Fragment implements NetConfigDialog.NetConfigD
             convertView = inflater.inflate(mResource,parent,false) ;
             try {
                 TextView currNetworkTextView             = convertView.findViewById(R.id.resNetworkTextView);
-                TextView currNetMaskTextView             = convertView.findViewById(R.id.resMaskTextView);
                 TextView currNetHostsRangeTextView       = convertView.findViewById(R.id.resHostsRangeTextView);
                 TextView CurrNetBroadcastTextView        = convertView.findViewById(R.id.resBroadcastTextView);
-                TextView currNetSizeTextView             = convertView.findViewById(R.id.resNetSizeTextView);
+                TextView currNetSizeRequiredTextView  = convertView.findViewById(R.id.resNetSizeRequiredTextView);
+                TextView resNetSizeAllocatedTextView  = convertView.findViewById(R.id.resNetSizeAllocatedTextView);
 
-                currNetworkTextView.setText(getItem(position).decMask);
-                currNetMaskTextView.setText(getItem(position).decMask);
+                currNetworkTextView.setText(getItem(position).decMask+getItem(position).maskCIDR);
                 currNetHostsRangeTextView.setText(getItem(position).range);
                 CurrNetBroadcastTextView.setText(getItem(position).broadcast);
-                currNetSizeTextView.setText(String.valueOf(getItem(position).neededSize));
+                int percentage = (int)(((float)getItem(position).neededSize / (float)getItem(position).allocatedSize)*100);
+                currNetSizeRequiredTextView.setText(String.format(getResources().getString(R.string.res_net_size_req),getItem(position).neededSize));
+                resNetSizeAllocatedTextView.setText(String.format(getResources().getString(R.string.res_net_size_alloc),getItem(position).allocatedSize,percentage));
+            // TODO: 22/01/2019   remove
             }catch (Exception e){
                 Log.i("Exception ", e.getMessage());
 

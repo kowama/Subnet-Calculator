@@ -20,29 +20,7 @@
             android:layout_column="2"
             android:layout_gravity="fill"
             android:layout_marginLeft="20dp"
-            android:text="192.168.100.0" />
-    </TableRow>
-
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp">
-
-        <TextView
-            android:id="@+id/labelMaskTextView"
-            android:layout_width="wrap_content"
-            android:layout_column="1"
-            android:layout_gravity="fill"
-            android:text="@string/label_subnet_mask" />
-
-        <TextView
-            android:id="@+id/resMaskTextView"
-            android:layout_width="wrap_content"
-            android:layout_column="2"
-            android:layout_gravity="fill"
-            android:layout_marginLeft="20dp"
-            android:text="255.255.255.0" />
+            android:text="192.168.100.0/24" />
     </TableRow>
 
     <TableRow
@@ -96,19 +74,20 @@
         android:paddingRight="5dp">
 
         <TextView
-            android:id="@+id/labelNetSizeTextView"
+            android:id="@+id/resNetSizeRequiredTextView"
             android:layout_width="wrap_content"
             android:layout_column="1"
+            android:layout_span="1"
             android:layout_gravity="fill"
-            android:text="@string/label_netSize" />
+            android:text="@string/res_net_size_req" />
 
         <TextView
-            android:id="@+id/resNetSizeTextView"
+            android:id="@+id/resNetSizeAllocatedTextView"
             android:layout_width="wrap_content"
             android:layout_column="2"
             android:layout_gravity="fill"
             android:layout_marginLeft="20dp"
-            android:text="300" />
+            android:text="@string/res_net_size_alloc" />
     </TableRow>
 
 

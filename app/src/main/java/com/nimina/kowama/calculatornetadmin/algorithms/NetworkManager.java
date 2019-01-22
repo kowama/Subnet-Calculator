@@ -19,7 +19,7 @@ public class NetworkManager {
         public int neededSize;
         public int allocatedSize;
         public String address;
-        public String mask;
+        public String maskCIDR;
         public String decMask;
         public String firstUsableHost;
         public String lastUsableHost;
@@ -36,7 +36,7 @@ public class NetworkManager {
             this.name = "A";
             int currentIp = findFirstIp(netAddress);
             this.address = convertIpToQuartet(currentIp);
-            this.mask = "/" + netAddress.split("/")[1];
+            this.maskCIDR = "/" + netAddress.split("/")[1];
             this.decMask = toDecMask(Integer.parseInt(netAddress.split("/")[1]));
             this.allocatedSize = findUsableHosts(Integer.parseInt(netAddress.split("/")[1]));
             this.broadcast = convertIpToQuartet(currentIp + allocatedSize + 1);
@@ -102,7 +102,7 @@ public class NetworkManager {
             subnet.neededSize = neededSize;
 
             int mask = calcMask(neededSize);
-            subnet.mask = "/" + mask;
+            subnet.maskCIDR = "/" + mask;
             subnet.decMask = toDecMask(mask);
 
             int allocatedSize = findUsableHosts(mask);
