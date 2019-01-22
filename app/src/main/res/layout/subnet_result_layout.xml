@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp">
+
+        <TextView
+            android:id="@+id/labelNetworkTextView"
+            android:layout_width="wrap_content"
+            android:layout_column="1"
+            android:layout_gravity="fill"
+            android:text="@string/label_network" />
+
+        <TextView
+            android:id="@+id/resNetworkTextView"
+            android:layout_width="wrap_content"
+            android:layout_column="2"
+            android:layout_gravity="fill"
+            android:layout_marginLeft="20dp"
+            android:text="192.168.100.0" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp">
+
+        <TextView
+            android:id="@+id/labelMaskTextView"
+            android:layout_width="wrap_content"
+            android:layout_column="1"
+            android:layout_gravity="fill"
+            android:text="@string/label_subnet_mask" />
+
+        <TextView
+            android:id="@+id/resMaskTextView"
+            android:layout_width="wrap_content"
+            android:layout_column="2"
+            android:layout_gravity="fill"
+            android:layout_marginLeft="20dp"
+            android:text="255.255.255.0" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp">
+
+        <TextView
+            android:id="@+id/labelHostsRangeTextView"
+            android:layout_width="wrap_content"
+            android:layout_column="1"
+            android:layout_gravity="fill"
+            android:text="@string/label_hosts_range" />
+
+        <TextView
+            android:id="@+id/resHostsRangeTextView"
+            android:layout_width="wrap_content"
+            android:layout_column="2"
+            android:layout_gravity="fill"
+            android:layout_marginLeft="20dp"
+            android:text="192.168.100.1 - 192.168.100.255" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp">
+
+        <TextView
+            android:id="@+id/labelBroadcastTextView"
+            android:layout_width="wrap_content"
+            android:layout_column="1"
+            android:layout_gravity="fill"
+            android:text="@string/label_Broadcast" />
+
+        <TextView
+            android:id="@+id/resBroadcastTextView"
+            android:layout_width="wrap_content"
+            android:layout_column="2"
+            android:layout_gravity="fill"
+            android:layout_marginLeft="20dp"
+            android:text="192.168.100.255" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp">
+
+        <TextView
+            android:id="@+id/labelNetSizeTextView"
+            android:layout_width="wrap_content"
+            android:layout_column="1"
+            android:layout_gravity="fill"
+            android:text="@string/label_netSize" />
+
+        <TextView
+            android:id="@+id/resNetSizeTextView"
+            android:layout_width="wrap_content"
+            android:layout_column="2"
+            android:layout_gravity="fill"
+            android:layout_marginLeft="20dp"
+            android:text="300" />
+    </TableRow>
+
+
+</TableLayout>

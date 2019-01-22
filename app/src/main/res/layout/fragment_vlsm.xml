@@ -25,8 +25,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="192"
-            android:maxLength="3"
             android:inputType="numberDecimal"
+            android:maxLength="3"
             android:minWidth="90dp"
             android:textSize="18sp" />
 
@@ -43,8 +43,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="168"
-            android:maxLength="3"
             android:inputType="numberDecimal"
+            android:maxLength="3"
             android:minWidth="90dp" />
 
         <TextView
@@ -60,8 +60,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="100"
-            android:maxLength="3"
             android:inputType="numberDecimal"
+            android:maxLength="3"
             android:minWidth="90dp"
             android:textSize="18sp" />
 
@@ -78,8 +78,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="0"
-            android:maxLength="3"
             android:inputType="numberDecimal"
+            android:maxLength="3"
             android:minWidth="90dp"
             android:textSize="18sp" />
 
@@ -97,8 +97,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="24"
-            android:maxLength="2"
             android:inputType="numberDecimal"
+            android:maxLength="2"
             android:minWidth="80dp"
             android:textSize="18sp" />
 
@@ -122,9 +122,9 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
+        android:max="30"
         android:min="1"
         android:progress="24"
-        android:max="30"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
@@ -143,127 +143,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ipMaskSeekBar" />
 
-    <TableLayout
-        android:id="@+id/resultTableLayout"
+    <ListView
+        android:id="@+id/resultListView"
         android:layout_width="0dp"
-        android:layout_height="473dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/netConfigButton">
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp">
-
-            <TextView
-                android:id="@+id/labelNetworkTextView"
-                android:layout_width="wrap_content"
-                android:layout_column="1"
-                android:layout_gravity="fill"
-                android:text="@string/label_network" />
-
-            <TextView
-                android:id="@+id/resNetworkTextView"
-                android:layout_width="wrap_content"
-                android:layout_column="2"
-                android:layout_gravity="fill"
-                android:layout_marginLeft="20dp"
-                android:text="192.168.100.0" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp">
-
-            <TextView
-                android:id="@+id/labelMaskTextView"
-                android:layout_width="wrap_content"
-                android:layout_column="1"
-                android:layout_gravity="fill"
-                android:text="@string/label_subnet_mask" />
-
-            <TextView
-                android:id="@+id/resMaskTextView"
-                android:layout_width="wrap_content"
-                android:layout_column="2"
-                android:layout_gravity="fill"
-                android:layout_marginLeft="20dp"
-                android:text="255.255.255.0" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp">
-
-            <TextView
-                android:id="@+id/labelHostsRangeTextView"
-                android:layout_width="wrap_content"
-                android:layout_column="1"
-                android:layout_gravity="fill"
-                android:text="@string/label_hosts_range" />
-
-            <TextView
-                android:id="@+id/resHostsRangeTextView"
-                android:layout_width="wrap_content"
-                android:layout_column="2"
-                android:layout_gravity="fill"
-                android:layout_marginLeft="20dp"
-                android:text="192.168.100.1 - 192.168.100.255" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp">
-
-            <TextView
-                android:id="@+id/labelBroadcastTextView"
-                android:layout_width="wrap_content"
-                android:layout_column="1"
-                android:layout_gravity="fill"
-                android:text="@string/label_Broadcast" />
-
-            <TextView
-                android:id="@+id/resBroadcastTextView"
-                android:layout_width="wrap_content"
-                android:layout_column="2"
-                android:layout_gravity="fill"
-                android:layout_marginLeft="20dp"
-                android:text="192.168.100.255" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp">
-
-            <TextView
-                android:id="@+id/labelNetSizeTextView"
-                android:layout_width="wrap_content"
-                android:layout_column="1"
-                android:layout_gravity="fill"
-                android:text="@string/label_netSize" />
-
-            <TextView
-                android:id="@+id/resNetSizeTextView"
-                android:layout_width="wrap_content"
-                android:layout_column="2"
-                android:layout_gravity="fill"
-                android:layout_marginLeft="20dp"
-                android:text="300" />
-        </TableRow>
-
-    </TableLayout>
+        app:layout_constraintTop_toBottomOf="@+id/netConfigButton" />
 
 </android.support.constraint.ConstraintLayout>

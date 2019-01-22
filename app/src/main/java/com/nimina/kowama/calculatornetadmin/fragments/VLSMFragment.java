@@ -1,16 +1,20 @@
 package com.nimina.kowama.calculatornetadmin.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.SeekBar;
-import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +22,7 @@ import com.nimina.kowama.calculatornetadmin.R;
 import com.nimina.kowama.calculatornetadmin.algorithms.NetworkManager;
 import com.nimina.kowama.calculatornetadmin.fragments.dialog.NetConfigDialog;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -25,15 +30,12 @@ public class VLSMFragment extends Fragment implements NetConfigDialog.NetConfigD
     private EditText[] mIpAddressEditText;
     private EditText mIpMaskEditText;
     private SeekBar mIpMaskSeekBar;
-    private TextView mResNetworkTextView;
-    private TextView mResMaskTextView;
-    private TextView mResHostsRangeTextView;
-    private TextView mResBroadcastTextView;
-    private TextView mResNetSizeTextView;
-    private TableLayout mResultsTableLayout;
+
+    private ListView mResultListView;
 
     private HashMap<String,Integer> mSubNetsMap = new HashMap<>();
-    private List<NetworkManager.Subnet> mResultSubnets;
+    private List<NetworkManager.Subnet> mResultSubNets = new ArrayList<>();
+    private String mMajorNetwork;
 
 
 
@@ -46,12 +48,8 @@ public class VLSMFragment extends Fragment implements NetConfigDialog.NetConfigD
         mIpMaskEditText = rootView.findViewById(R.id.ipMaskEditText);
         mIpMaskSeekBar  = rootView.findViewById(R.id.ipMaskSeekBar);
 
-        mResultsTableLayout    = rootView.findViewById(R.id.resultTableLayout);
-        mResNetworkTextView    = rootView.findViewById(R.id.resNetworkTextView);
-        mResMaskTextView       = rootView.findViewById(R.id.resMaskTextView);
-        mResHostsRangeTextView = rootView.findViewById(R.id.resHostsRangeTextView);
-        mResBroadcastTextView  = rootView.findViewById(R.id.resBroadcastTextView);
-        mResNetSizeTextView    = rootView.findViewById(R.id.resNetSizeTextView);
+
+        mResultListView = rootView.findViewById(R.id.resultListView);
 
         clearAllViews();
 
@@ -80,13 +78,10 @@ public class VLSMFragment extends Fragment implements NetConfigDialog.NetConfigD
     }
 
     private void clearAllViews(){
-        mResultsTableLayout.setVisibility(View.INVISIBLE);
-
         for (final EditText ipPartEditText : mIpAddressEditText){
             ipPartEditText.setText("");
         }
         mIpMaskEditText.setText("");
-
     }
     public void clearAll(View view){
         clearAllViews();
@@ -104,9 +99,67 @@ public class VLSMFragment extends Fragment implements NetConfigDialog.NetConfigD
 
     @Override
     public void applyNetworksMap(HashMap<String, Integer> subNetsMap) {
-        mSubNetsMap = subNetsMap;
+        mSubNetsMap     = subNetsMap;
+        mMajorNetwork = "192.168.44.0/22";
+        NetworkManager.checkIfValidNetworkAddress(mMajorNetwork);
+        mResultSubNets  = NetworkManager.calcVLSM(mMajorNetwork, mSubNetsMap);
         // TODO: 21/01/2019
-        //vlsm operattion
-        Toast.makeText(getContext(),mSubNetsMap.toString(),Toast.LENGTH_SHORT).show();
+        SubnetResultAdapter subnetResultAdapter = new SubnetResultAdapter(getContext(),R.layout.subnet_result_layout,mResultSubNets);
+        mResultListView.setAdapter(subnetResultAdapter);
     }
+
+    private class SubnetResultAdapter extends ArrayAdapter<NetworkManager.Subnet>{
+        private Context mContext;
+        private int mResource;
+        private List<NetworkManager.Subnet> mSubNetList = new ArrayList<>();
+
+        public SubnetResultAdapter(Context context, int resource,List<NetworkManager.Subnet> subNetList) {
+            super(context, resource, subNetList);
+            mContext    = context;
+            mResource   = resource;
+            mSubNetList = subNetList;
+
+        }
+
+        @Override
+        public int getCount() {
+            return mSubNetList.size();
+        }
+
+        @Override
+        public NetworkManager.Subnet getItem(int position) {
+            return mSubNetList.get(position);
+        }
+
+        @NonNull
+        @Override
+        public View getView(int position,  View convertView,  ViewGroup parent) {
+            // TODO: 21/01/2019
+            LayoutInflater inflater= LayoutInflater.from(mContext);
+
+            convertView = inflater.inflate(mResource,parent,false) ;
+            try {
+                TextView currNetworkTextView             = convertView.findViewById(R.id.resNetworkTextView);
+                TextView currNetMaskTextView             = convertView.findViewById(R.id.resMaskTextView);
+                TextView currNetHostsRangeTextView       = convertView.findViewById(R.id.resHostsRangeTextView);
+                TextView CurrNetBroadcastTextView        = convertView.findViewById(R.id.resBroadcastTextView);
+                TextView currNetSizeTextView             = convertView.findViewById(R.id.resNetSizeTextView);
+
+                currNetworkTextView.setText(getItem(position).decMask);
+                currNetMaskTextView.setText(getItem(position).decMask);
+                currNetHostsRangeTextView.setText(getItem(position).range);
+                CurrNetBroadcastTextView.setText(getItem(position).broadcast);
+                currNetSizeTextView.setText(String.valueOf(getItem(position).neededSize));
+            }catch (Exception e){
+                Log.i("Exception ", e.getMessage());
+
+            }
+
+
+            return convertView;
+        }
+    }
+
+
+
 }
