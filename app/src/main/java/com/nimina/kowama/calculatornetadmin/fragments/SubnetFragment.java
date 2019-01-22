@@ -90,7 +90,7 @@ public class SubnetFragment extends Fragment {
             mResNetSizeTextView.setText(String.valueOf(mIpNetwork.allocatedSize));
 
             mResultsTableLayout.setVisibility(View.VISIBLE);
-           // MainActivity.hideSoftKeyboard(this.getActivity());
+            //?hide Keyboard ?
 
         }catch (IllegalArgumentException e){
             /**-----expected EXCEPTION -------**/

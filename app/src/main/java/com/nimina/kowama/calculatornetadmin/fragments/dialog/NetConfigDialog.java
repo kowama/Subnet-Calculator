@@ -5,10 +5,12 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -16,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
@@ -23,6 +26,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.nimina.kowama.calculatornetadmin.MainActivity;
 import com.nimina.kowama.calculatornetadmin.R;
 
 import java.util.HashMap;
@@ -36,32 +40,35 @@ public class NetConfigDialog extends DialogFragment {
     private ListView mSubNetsHashMapListView;
     private FloatingActionButton mAddSubNetFloatingActionButton;
 
-
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater layoutInflater = getActivity().getLayoutInflater();
-        View view = layoutInflater.inflate(R.layout.net_config_dialog, null);
+        final View view = layoutInflater.inflate(R.layout.net_config_dialog, null);
 
         builder.setView(view)
                 .setTitle(R.string.label_net_conf_d_title)
                 .setNegativeButton(R.string.button_negative, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //
+                        MainActivity.hideSoftKeyboard(getContext());
                     }
                 }).setPositiveButton(R.string.button_positive, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         for (String key : mSubNetsHashMap.keySet()){
-                            try {
+                            if(mSubNetsHashMap.get(key) == null || mSubNetsHashMap.get(key) < 0){
+                                //Not Close Dialog
+                                Toast.makeText(getActivity().getBaseContext(),"Network config not valid !",Toast.LENGTH_SHORT);
 
+                            }else {
                                 mNetConfigDialogListener.applyNetworksMap(mSubNetsHashMap);
-                            }catch (Exception e){
+
 
                             }
                         }
+                        MainActivity.hideSoftKeyboard(getContext());
                     }
         });
 
@@ -81,16 +88,17 @@ public class NetConfigDialog extends DialogFragment {
 
         /**initial subnet **/
         mSubNetsHashMap.put("Network 1",null);
+
         updateSubNetsHashMapListView();
         final Dialog dialog = builder.create();
 
         mSubNetsHashMapListView.post(new Runnable() {
-
             @Override
             public void run() {
-                dialog.getWindow().clearFlags(
+               dialog.getWindow().clearFlags(
                         WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE |
                                 WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+
             }
         });
 
@@ -114,8 +122,6 @@ public class NetConfigDialog extends DialogFragment {
     public interface  NetConfigDialogListener{
         void applyNetworksMap(HashMap<String,Integer> subNetsMap);
     }
-
-
 
     private class SubNetHashMapAdapter extends BaseAdapter {
         private Context mContext;
@@ -155,11 +161,19 @@ public class NetConfigDialog extends DialogFragment {
                 final EditText subNetSizeEditText       = convertView.findViewById(R.id.subNetSizeEditText);
                 ImageButton delSubNetButton       = convertView.findViewById(R.id.delSubNetButton);
 
+                //show keyBoard on focus
+                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.showSoftInput(subNetSizeEditText, InputMethodManager.SHOW_IMPLICIT);
+                imm.showSoftInput(subNetNameEditText,InputMethodManager.SHOW_IMPLICIT);
+
+
                 final String name = mKeys[pos];
                 final Integer size = getItem(pos);
 
                 subNetNameEditText.setText(name);
-                subNetSizeEditText.setText(String.valueOf(size));
+                if(size != null){
+                    subNetSizeEditText.setText(String.valueOf(size));
+                }
 
                 /** Listener **/
                 subNetNameEditText.addTextChangedListener(new TextWatcher() {
@@ -175,7 +189,6 @@ public class NetConfigDialog extends DialogFragment {
 
                     @Override
                     public void afterTextChanged(Editable s) {
-                        mData.remove(name);
                         mData.put(s.toString(),size);
                         updateSubNetsHashMapListView();
                     }
@@ -197,7 +210,7 @@ public class NetConfigDialog extends DialogFragment {
                             if ((Integer.valueOf(s.toString()) > 0)){
                                 mData.put(name, Integer.valueOf(s.toString()));
                                 subNetNameEditText.setTextColor(Color.BLACK);
-                                updateSubNetsHashMapListView();
+                               // updateSubNetsHashMapListView();
 
                             }else {
                                 subNetSizeEditText.setTextColor(Color.RED);

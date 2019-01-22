@@ -197,7 +197,6 @@ public class VLSMFragment extends Fragment implements NetConfigDialog.NetConfigD
         mResultSubNets  = NetworkManager.calcVLSM(mMajorNetwork, mSubNetsMap);
         SubnetResultAdapter subnetResultAdapter = new SubnetResultAdapter(getContext(),R.layout.subnet_result_layout,mResultSubNets);
         mResultListView.setAdapter(subnetResultAdapter);
-        MainActivity.hideSoftKeyboard(getActivity());
     }
 
     private class SubnetResultAdapter extends ArrayAdapter<NetworkManager.Subnet>{
