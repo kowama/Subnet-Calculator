@@ -7,8 +7,23 @@
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp">
+        >
+        <TextView
+            android:id="@+id/resNetworkNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorAccent"
+            android:gravity="center"
+            android:layout_column="1"
+            android:layout_span="2"
+            android:minEms="10"
+            />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
 
         <TextView
             android:id="@+id/labelNetworkTextView"
@@ -22,8 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_column="2"
             android:layout_gravity="fill"
-            android:layout_marginLeft="20dp"
-            android:text="192.168.100.0/24" />
+            android:minEms="10" />
     </TableRow>
 
     <TableRow
@@ -44,8 +58,9 @@
             android:layout_width="wrap_content"
             android:layout_column="2"
             android:layout_gravity="fill"
-            android:layout_marginLeft="20dp"
-            android:text="192.168.100.1 - 192.168.100.255" />
+            android:minEms="10"
+
+            />
     </TableRow>
 
     <TableRow
@@ -66,8 +81,8 @@
             android:layout_width="wrap_content"
             android:layout_column="2"
             android:layout_gravity="fill"
-            android:layout_marginLeft="20dp"
-            android:text="192.168.100.255" />
+            android:minEms="10"
+            />
     </TableRow>
 
     <TableRow
@@ -82,6 +97,7 @@
             android:layout_column="1"
             android:layout_gravity="fill"
             android:layout_span="1"
+            android:minEms="6"
             android:text="@string/res_net_size_req" />
 
         <TextView
@@ -89,7 +105,7 @@
             android:layout_width="wrap_content"
             android:layout_column="2"
             android:layout_gravity="fill"
-            android:layout_marginLeft="20dp"
+            android:minEms="10"
             android:text="@string/res_net_size_alloc" />
     </TableRow>
 

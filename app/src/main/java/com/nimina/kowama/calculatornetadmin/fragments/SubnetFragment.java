@@ -1,6 +1,7 @@
 package com.nimina.kowama.calculatornetadmin.fragments;
 
 import android.graphics.Color;
+import android.nfc.FormatException;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -128,14 +129,24 @@ public class SubnetFragment extends Fragment {
                 @Override
                 public void afterTextChanged(Editable s) {
                     if(s.length() >0){
-                        if (s.length()>0 &&Integer.parseInt(s.toString()) < 0 || Integer.parseInt(s.toString()) > 255){
-                            ipPartEditText.setTextColor(Color.RED);
-                            mResultsTableLayout.setVisibility(View.INVISIBLE);
+                        try {
+                            if (s.length()>0 &&Integer.parseInt(s.toString()) < 0 || Integer.parseInt(s.toString()) > 255){
+                                ipPartEditText.setTextColor(Color.RED);
+                                mResultsTableLayout.setVisibility(View.INVISIBLE);
+                            }
+                            else{
+                                ipPartEditText.setTextColor(Color.BLACK);
+                                updateResult();
+                            }
+
+                        }catch (NumberFormatException e){
+
+
+                        }catch (Exception e){
+                            Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
                         }
-                        else{
-                            ipPartEditText.setTextColor(Color.BLACK);
-                            updateResult();
-                        }
+
+
                     }
 
                 }
@@ -155,13 +166,21 @@ public class SubnetFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
                if(s.length() > 0){
-                   if (Integer.parseInt(s.toString()) < 1 || Integer.parseInt(s.toString()) >30){
-                       mIpMaskEditText.setTextColor(Color.RED);
-                       mResultsTableLayout.setVisibility(View.INVISIBLE);
-                   }else {
-                       mIpMaskEditText.setTextColor(Color.BLACK);
-                       mIpMaskSeekBar.setProgress(Integer.parseInt(mIpMaskEditText.getText().toString()));
-                       updateResult();
+                   try {
+                       if (Integer.parseInt(s.toString()) < 1 || Integer.parseInt(s.toString()) >30){
+                           mIpMaskEditText.setTextColor(Color.RED);
+                           mResultsTableLayout.setVisibility(View.INVISIBLE);
+                       }else {
+                           mIpMaskEditText.setTextColor(Color.BLACK);
+                           mIpMaskSeekBar.setProgress(Integer.parseInt(mIpMaskEditText.getText().toString()));
+                           updateResult();
+                       }
+
+                   }catch (NumberFormatException e){
+
+
+                   }catch (Exception e){
+                       Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
                    }
                    mIpMaskEditText.setSelection(mIpMaskEditText.getText().length());
                }
