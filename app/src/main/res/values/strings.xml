@@ -13,9 +13,9 @@
     <string name="label_hosts_range">Hosts Range:</string>
     <string name="label_Broadcast">Broadcast:</string>
     <string name="label_netSize">Available Hosts:</string>
-    <string name="res_network">%1$s<b>%2$s</b></string>
-    <string name="res_net_size_req">Required: %1$d</string>
-    <string name="res_net_size_alloc">Allocated: %1$d (%2$d%%)</string>
+    <string name="res_network">%1$s &lt;b> %2$s &lt;/b></string>
+    <string name="res_net_size_req">Required: &lt;b>%1$d &lt;/b></string>
+    <string name="res_net_size_alloc">Allocated: &lt;b>%1$ d&lt;/b> (%2$d%%)</string>
 
     <string name="button_configure_net"><u>CONFIGURE NETWORKS</u></string>
     <string name="button_negative">Cancel</string>

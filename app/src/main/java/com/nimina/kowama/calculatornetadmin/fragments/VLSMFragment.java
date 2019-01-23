@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -265,13 +266,12 @@ public class VLSMFragment extends Fragment implements NetConfigDialog.NetConfigD
                 TextView resNetSizeAllocatedTextView     = convertView.findViewById(R.id.resNetSizeAllocatedTextView);
 
                 curResNetworkNameTextView.setText(getItem(position).name);
-                currNetworkTextView.setText(String.format(getResources().getString(R.string.res_network),
-                                                getItem(position).address,getItem(position).maskCIDR));
+                currNetworkTextView.setText(Html.fromHtml((getString(R.string.res_network,getItem(position).address,getItem(position).maskCIDR))));
                 currNetHostsRangeTextView.setText(getItem(position).range);
                 CurrNetBroadcastTextView.setText(getItem(position).broadcast);
                 int percentage = (int)(((float)getItem(position).neededSize / (float)getItem(position).allocatedSize)*100);
-                currNetSizeRequiredTextView.setText(String.format(getResources().getString(R.string.res_net_size_req),getItem(position).neededSize));
-                resNetSizeAllocatedTextView.setText(String.format(getResources().getString(R.string.res_net_size_alloc),getItem(position).allocatedSize,percentage));
+                currNetSizeRequiredTextView.setText(Html.fromHtml(getString(R.string.res_net_size_req,getItem(position).neededSize)));
+                resNetSizeAllocatedTextView.setText(Html.fromHtml(getString(R.string.res_net_size_alloc,getItem(position).allocatedSize,percentage)));
             }catch (NullPointerException e){
                 e.printStackTrace();
             }
@@ -279,8 +279,6 @@ public class VLSMFragment extends Fragment implements NetConfigDialog.NetConfigD
                 Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
 
             }
-
-
             return convertView;
         }
     }

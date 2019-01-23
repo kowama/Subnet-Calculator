@@ -1,7 +1,6 @@
 package com.nimina.kowama.calculatornetadmin.fragments;
 
 import android.graphics.Color;
-import android.nfc.FormatException;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -18,7 +17,6 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.nimina.kowama.calculatornetadmin.MainActivity;
 import com.nimina.kowama.calculatornetadmin.R;
 import com.nimina.kowama.calculatornetadmin.algorithms.NetworkManager;
 
@@ -32,8 +30,6 @@ public class SubnetFragment extends Fragment {
     private TextView mResBroadcastTextView;
     private TextView mResNetSizeTextView;
     private TableLayout mResultsTableLayout;
-
-    private NetworkManager.Subnet mIpNetwork;
 
     private void initViews(View rootView){
         mIpAddressEditText = new EditText[4];
@@ -82,11 +78,11 @@ public class SubnetFragment extends Fragment {
                     + mIpAddressEditText[3].getText().toString()+"/"
                     + mIpMaskEditText.getText().toString();
 
-            mIpNetwork = new NetworkManager.Subnet(ipAddress);
+            NetworkManager.Subnet mIpNetwork = new NetworkManager.Subnet(ipAddress);
 
             mResNetworkTextView.setText(mIpNetwork.address);
             mResMaskTextView.setText(mIpNetwork.decMask);
-            mResHostsRangeTextView.setText(mIpNetwork.firstUsableHost+" - "+mIpNetwork.lastUsableHost);
+            mResHostsRangeTextView.setText(mIpNetwork.range);
             mResBroadcastTextView.setText(mIpNetwork.broadcast);
             mResNetSizeTextView.setText(String.valueOf(mIpNetwork.allocatedSize));
 
@@ -94,7 +90,7 @@ public class SubnetFragment extends Fragment {
             //?hide Keyboard ?
 
         }catch (IllegalArgumentException e){
-            /**-----expected EXCEPTION -------**/
+            /*-----expected EXCEPTION -------*/
             mResultsTableLayout.setVisibility(View.INVISIBLE);
         }catch (Exception e){
             Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
@@ -111,7 +107,7 @@ public class SubnetFragment extends Fragment {
                 .setAction("Action", null).show();
     }
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_subnet, container, false);
         initViews(rootView);
         for (final EditText ipPartEditText : mIpAddressEditText)
@@ -140,7 +136,7 @@ public class SubnetFragment extends Fragment {
                             }
 
                         }catch (NumberFormatException e){
-
+                            e.printStackTrace();
 
                         }catch (Exception e){
                             Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
@@ -177,7 +173,7 @@ public class SubnetFragment extends Fragment {
                        }
 
                    }catch (NumberFormatException e){
-
+                       e.printStackTrace();
 
                    }catch (Exception e){
                        Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
