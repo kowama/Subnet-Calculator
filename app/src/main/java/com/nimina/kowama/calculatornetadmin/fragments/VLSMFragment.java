@@ -24,7 +24,7 @@ import android.widget.Toast;
 
 import com.nimina.kowama.calculatornetadmin.MainActivity;
 import com.nimina.kowama.calculatornetadmin.R;
-import com.nimina.kowama.calculatornetadmin.algorithms.NetworkManager;
+import com.nimina.kowama.calculatornetadmin.model.NetworkManager;
 import com.nimina.kowama.calculatornetadmin.fragments.dialog.NetConfigDialog;
 
 import org.jetbrains.annotations.NotNull;

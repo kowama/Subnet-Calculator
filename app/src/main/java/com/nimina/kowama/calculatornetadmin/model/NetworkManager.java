@@ -1,4 +1,4 @@
-package com.nimina.kowama.calculatornetadmin.algorithms;
+package com.nimina.kowama.calculatornetadmin.model;
 
 import java.util.ArrayList;
 import java.util.Collections;

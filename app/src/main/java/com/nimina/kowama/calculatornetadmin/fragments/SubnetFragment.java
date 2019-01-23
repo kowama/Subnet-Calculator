@@ -18,7 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nimina.kowama.calculatornetadmin.R;
-import com.nimina.kowama.calculatornetadmin.algorithms.NetworkManager;
+import com.nimina.kowama.calculatornetadmin.model.NetworkManager;
 
 public class SubnetFragment extends Fragment {
     private EditText[] mIpAddressEditText;
