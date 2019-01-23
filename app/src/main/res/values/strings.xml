@@ -32,6 +32,8 @@
     <string name="_100">100</string>
     <string name="_24">24</string>
     <string name="clear_button">clear button</string>
+    <string name="wildcard_mask">Wildcard Mask:</string>
+    <string name="mask_cidr">Mask CIDR:</string>
 
 
 </resources>

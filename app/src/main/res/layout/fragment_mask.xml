@@ -12,11 +12,172 @@
         android:id="@+id/maskSpinner"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <SeekBar
+        android:id="@+id/maskSeekBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:max="33"
+        android:progress="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/maskSpinner" />
+
+    <TableLayout
+        android:id="@+id/resultTableLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/maskSeekBar">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <TextView
+                android:id="@+id/labelMaskTextView"
+                android:layout_width="wrap_content"
+                android:layout_column="1"
+                android:layout_gravity="fill"
+                android:text="@string/label_subnet_mask" />
+
+            <TextView
+                android:id="@+id/resMaskTextView"
+                android:layout_width="wrap_content"
+                android:layout_column="2"
+                android:layout_gravity="fill"
+                android:layout_marginStart="20dp"
+                android:minEms="10" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <TextView
+                android:id="@+id/labelWildcardMaskTextView"
+                android:layout_width="wrap_content"
+                android:layout_column="1"
+                android:layout_gravity="fill"
+                android:text="@string/wildcard_mask" />
+
+            <TextView
+                android:id="@+id/resWildcardMaskTextView"
+                android:layout_width="wrap_content"
+                android:layout_column="2"
+                android:layout_gravity="fill"
+                android:layout_marginStart="20dp"
+                android:minEms="10" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <TextView
+                android:id="@+id/labelMaskCIDRTextView"
+                android:layout_width="wrap_content"
+                android:layout_column="1"
+                android:layout_gravity="fill"
+                android:text="@string/mask_cidr" />
+
+            <TextView
+                android:id="@+id/resMaskCIDRTextView"
+                android:layout_width="wrap_content"
+                android:layout_column="2"
+                android:layout_gravity="fill"
+                android:layout_marginStart="20dp"
+                android:minEms="10" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <TextView
+                android:id="@+id/labelNetSizeTextView"
+                android:layout_width="wrap_content"
+                android:layout_column="1"
+                android:layout_gravity="fill"
+                android:text="@string/label_netSize" />
+
+            <TextView
+                android:id="@+id/resNetSizeTextView"
+                android:layout_width="wrap_content"
+                android:layout_column="2"
+                android:layout_gravity="fill"
+                android:layout_marginStart="20dp"
+                android:minEms="5" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="5dp"
+            android:paddingTop="30dp"
+            android:paddingRight="5dp">
+
+            <TextView
+                android:id="@+id/labelMaskBinTextView"
+                android:layout_width="wrap_content"
+                android:layout_column="1"
+                android:layout_gravity="fill"
+                android:text="@string/label_subnet_mask" />
+
+            <TextView
+                android:id="@+id/resMaskBinTextView"
+                android:layout_width="wrap_content"
+                android:layout_column="2"
+                android:layout_gravity="fill"
+                android:layout_marginStart="20dp"
+                android:minEms="10" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <TextView
+                android:id="@+id/labelWildcardMaskBinTextView"
+                android:layout_width="wrap_content"
+                android:layout_column="1"
+                android:layout_gravity="fill"
+                android:text="@string/wildcard_mask" />
+
+            <TextView
+                android:id="@+id/resWildcardMaskBinTextView"
+                android:layout_width="wrap_content"
+                android:layout_column="2"
+                android:layout_gravity="fill"
+                android:layout_marginStart="20dp"
+                android:minEms="10" />
+        </TableRow>
+
+    </TableLayout>
 </android.support.constraint.ConstraintLayout>
