@@ -7,6 +7,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -87,7 +88,7 @@ public class SubnetFragment extends Fragment {
             mResNetSizeTextView.setText(String.valueOf(mIpNetwork.allocatedSize));
 
             mResultsTableLayout.setVisibility(View.VISIBLE);
-            //?hide Keyboard ?
+            //** hide Keyboard ?
 
         }catch (IllegalArgumentException e){
             /*-----expected EXCEPTION -------*/
@@ -136,7 +137,7 @@ public class SubnetFragment extends Fragment {
                             }
 
                         }catch (NumberFormatException e){
-                            e.printStackTrace();
+                            Log.e("Exception",Log.getStackTraceString(e));
 
                         }catch (Exception e){
                             Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
@@ -173,7 +174,7 @@ public class SubnetFragment extends Fragment {
                        }
 
                    }catch (NumberFormatException e){
-                       e.printStackTrace();
+                       Log.e("Exception",Log.getStackTraceString(e));
 
                    }catch (Exception e){
                        Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_SHORT).show();

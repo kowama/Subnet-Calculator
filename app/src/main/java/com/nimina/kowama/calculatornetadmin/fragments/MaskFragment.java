@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,13 +33,19 @@ public class MaskFragment extends Fragment {
 
 
     private void updateResultView(int mask){
+        try {
 
-        mResMaskTextView.setText(NetworkManager.toDecMask(mask));
-        mRsWildcardMaskTextView.setText(NetworkManager.toDecWildCardMask(mask));
-        mResMaskCIDRTextView.setText(getString(R.string.slash_mask, mask));
-        mResNetSizeTextView.setText(String.valueOf(NetworkManager.findUsableHosts(mask)));
-        mResMaskBinTextView.setText(Integer.toBinaryString(NetworkManager.toIntMask(mask)));
-        mResWildcardMaskBinTextView.setText(Integer.toBinaryString(NetworkManager.toIntWildcardMask(mask)));
+            mResMaskTextView.setText(NetworkManager.toDecMask(mask));
+            mRsWildcardMaskTextView.setText(NetworkManager.toDecWildCardMask(mask));
+            mResMaskCIDRTextView.setText(getString(R.string.slash_mask, mask));
+            mResNetSizeTextView.setText(String.valueOf(NetworkManager.findUsableHosts(mask)));
+            mResMaskBinTextView.setText(NetworkManager.toBinOctets(NetworkManager.toIntMask(mask)));
+            mResWildcardMaskBinTextView.setText(NetworkManager.toBinOctets(NetworkManager.toIntWildcardMask(mask)));
+
+        }catch (Exception e){
+            Log.e("Exception", Log.getStackTraceString(e));
+        }
+
     }
 
     private void initViews(View rootView){

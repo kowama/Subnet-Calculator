@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -93,7 +94,7 @@ public class VLSMFragment extends Fragment implements NetConfigDialog.NetConfigD
                             }
                         }
                     }catch (NumberFormatException e){
-                        e.printStackTrace();
+                        Log.e("Exception",Log.getStackTraceString(e));
 
                     }catch (Exception e){
                         Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
@@ -128,7 +129,7 @@ public class VLSMFragment extends Fragment implements NetConfigDialog.NetConfigD
                         }
                         mIpMaskEditText.setSelection(mIpMaskEditText.getText().length());
                     }catch (NumberFormatException e){
-                        e.printStackTrace();
+                        Log.e("Exception",Log.getStackTraceString(e));
 
 
                     }catch (Exception e){
@@ -273,7 +274,7 @@ public class VLSMFragment extends Fragment implements NetConfigDialog.NetConfigD
                 currNetSizeRequiredTextView.setText(Html.fromHtml(getString(R.string.res_net_size_req,getItem(position).neededSize)));
                 resNetSizeAllocatedTextView.setText(Html.fromHtml(getString(R.string.res_net_size_alloc,getItem(position).allocatedSize,percentage)));
             }catch (NullPointerException e){
-                e.printStackTrace();
+                Log.e("Exception", Log.getStackTraceString(e));
             }
             catch (Exception e){
                 Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
