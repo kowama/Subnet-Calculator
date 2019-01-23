@@ -11,10 +11,9 @@
         android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:paddingRight="16dp"
+        android:layout_marginEnd="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -24,9 +23,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="192"
+            android:hint="@string/_192"
+            android:inputType="number"
             android:maxLength="3"
-            android:inputType="numberDecimal"
             android:minWidth="90dp"
             android:textSize="18sp" />
 
@@ -42,9 +41,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="168"
+            android:hint="@string/_168"
+            android:inputType="number"
             android:maxLength="3"
-            android:inputType="numberDecimal"
             android:minWidth="90dp" />
 
         <TextView
@@ -59,9 +58,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="100"
+            android:hint="@string/_100"
+            android:inputType="number"
             android:maxLength="3"
-            android:inputType="numberDecimal"
             android:minWidth="90dp"
             android:textSize="18sp" />
 
@@ -77,9 +76,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="0"
+            android:hint="@string/_0"
+            android:inputType="number"
             android:maxLength="3"
-            android:inputType="numberDecimal"
             android:minWidth="90dp"
             android:textSize="18sp" />
 
@@ -96,9 +95,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="24"
+            android:hint="@string/_24"
+            android:inputType="number"
             android:maxLength="2"
-            android:inputType="numberDecimal"
             android:minWidth="80dp"
             android:textSize="18sp" />
 
@@ -106,11 +105,10 @@
             android:id="@+id/clearImageButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="70dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginStart="70dp"
+            android:layout_marginEnd="10dp"
             android:layout_weight="1"
-            android:maxWidth="60dp"
-            android:maxHeight="60dp"
+            android:contentDescription="@string/clear_button"
             android:minWidth="80dp"
             android:src="@drawable/ic_delete_blue_24dp" />
 
@@ -123,9 +121,9 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
+        android:max="30"
         android:min="1"
         android:progress="24"
-        android:max="30"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
@@ -159,8 +157,8 @@
                 android:layout_width="wrap_content"
                 android:layout_column="2"
                 android:layout_gravity="fill"
-                android:layout_marginLeft="20dp"
-                android:text="192.168.100.0" />
+                android:layout_marginStart="20dp"
+                android:minEms="10" />
         </TableRow>
 
         <TableRow
@@ -181,8 +179,8 @@
                 android:layout_width="wrap_content"
                 android:layout_column="2"
                 android:layout_gravity="fill"
-                android:layout_marginLeft="20dp"
-                android:text="255.255.255.0" />
+                android:layout_marginStart="20dp"
+                android:minEms="10" />
         </TableRow>
 
         <TableRow
@@ -203,8 +201,8 @@
                 android:layout_width="wrap_content"
                 android:layout_column="2"
                 android:layout_gravity="fill"
-                android:layout_marginLeft="20dp"
-                android:text="192.168.100.1 - 192.168.100.255" />
+                android:layout_marginStart="20dp"
+                android:minEms="10" />
         </TableRow>
 
         <TableRow
@@ -225,8 +223,8 @@
                 android:layout_width="wrap_content"
                 android:layout_column="2"
                 android:layout_gravity="fill"
-                android:layout_marginLeft="20dp"
-                android:text="192.168.100.255" />
+                android:layout_marginStart="20dp"
+                android:minEms="10"/>
         </TableRow>
 
         <TableRow
@@ -247,8 +245,8 @@
                 android:layout_width="wrap_content"
                 android:layout_column="2"
                 android:layout_gravity="fill"
-                android:layout_marginLeft="20dp"
-                android:text="300" />
+                android:layout_marginStart="20dp"
+                android:minEms="5" />
         </TableRow>
 
     </TableLayout>

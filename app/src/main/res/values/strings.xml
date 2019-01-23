@@ -26,6 +26,12 @@
     <string name="hint_net_size">Size</string>
     <string name="delete_net_button">delete net button</string>
     <string name="network_name">network name</string>
+    <string name="_192">192</string>
+    <string name="_168">168</string>
+    <string name="_0">0</string>
+    <string name="_100">100</string>
+    <string name="_24">24</string>
+    <string name="clear_button">clear button</string>
 
 
 </resources>
