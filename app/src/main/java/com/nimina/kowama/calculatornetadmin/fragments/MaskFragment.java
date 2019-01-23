@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.SeekBar;
 import android.widget.Spinner;
-import android.widget.TableLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.nimina.kowama.calculatornetadmin.R;
 import com.nimina.kowama.calculatornetadmin.model.NetworkManager;
@@ -25,8 +22,6 @@ import java.util.List;
 public class MaskFragment extends Fragment {
     private Spinner mMaskSpinner;
     private SeekBar mMaskSeekBar;
-    private List<String> mMaskList ;
-    private TableLayout mResultTableLayout;
     private TextView mResMaskTextView;
     private TextView mRsWildcardMaskTextView;
     private TextView mResMaskCIDRTextView;
@@ -36,19 +31,18 @@ public class MaskFragment extends Fragment {
 
 
 
-    private void updateResultView(int maskCIDR){
+    private void updateResultView(int mask){
 
-        mResMaskTextView.setText(NetworkManager.toDecMask(maskCIDR));
-        mRsWildcardMaskTextView.setText(NetworkManager.convertIpToQuartet(32-maskCIDR));
-        mResMaskCIDRTextView.setText("/"+String.valueOf(maskCIDR));
-        mResNetSizeTextView.setText(String.valueOf(Math.pow(2,32 - maskCIDR)-1));
-        mResMaskBinTextView.setText(Integer.toBinaryString(maskCIDR));
-        mResWildcardMaskBinTextView.setText(Integer.toBinaryString(32-maskCIDR));
+        mResMaskTextView.setText(NetworkManager.toDecMask(mask));
+        mRsWildcardMaskTextView.setText(NetworkManager.toDecWildCardMask(mask));
+        mResMaskCIDRTextView.setText(getString(R.string.slash_mask, mask));
+        mResNetSizeTextView.setText(String.valueOf(NetworkManager.findUsableHosts(mask)));
+        mResMaskBinTextView.setText(Integer.toBinaryString(NetworkManager.toIntMask(mask)));
+        mResWildcardMaskBinTextView.setText(Integer.toBinaryString(NetworkManager.toIntWildcardMask(mask)));
     }
-    /*init views */
+
     private void initViews(View rootView){
         mMaskSpinner                 = rootView.findViewById(R.id.maskSpinner);
-        mResultTableLayout           = rootView.findViewById(R.id.resultTableLayout);
         mMaskSeekBar                 = rootView.findViewById(R.id.maskSeekBar);
 
         mResMaskTextView             = rootView.findViewById(R.id.resMaskTextView);
@@ -59,7 +53,7 @@ public class MaskFragment extends Fragment {
         mResWildcardMaskBinTextView  = rootView.findViewById(R.id.resWildcardMaskBinTextView);
 
 
-        mMaskList = new ArrayList<>();
+        List<String> mMaskList = new ArrayList<>();
         for (int mask =0; mask<33; mask++){
             mMaskList.add(NetworkManager.toDecMask(mask));
         }

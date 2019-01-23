@@ -225,6 +225,23 @@ public class NetworkManager {
     }
 
     /**
+     * Convert mask from CIDR \slash  notation to integer form mask
+     * <p/>
+     *
+     * @param mask  Mask in CIDR \slash notation
+     * @return Mask in quartet  integer form
+     */
+    public static int toIntMask(int mask) {
+        if (mask == 0) {
+            return 0;
+        }
+        int allOne = -1;    // '255.255.255.255'
+        int shifted = allOne << (Integer.SIZE - mask);
+
+        return shifted;
+    }
+
+    /**
      * Convert mask from CIDR notation to quartet form.
      * <p/>
      * Example: <code>'/24'</code> to <code>'255.255.255.0'</code>
@@ -233,14 +250,29 @@ public class NetworkManager {
      * @return Mask in quartet form
      */
     public static String toDecMask(int mask) {
-        if (mask == 0) {
-            return "0.0.0.0";
-        }
-        int allOne = -1;    // '255.255.255.255'
-        int shifted = allOne << (Integer.SIZE - mask);
-
-        return convertIpToQuartet(shifted);
+        return convertIpToQuartet(toIntMask(mask));
     }
 
+    /**
+     * Convert mask from CIDR  slash notation to  wildcardMask int form.
+     * @param mask Mask in CIDR notation
+     * @return Wildcard Mask integer form
+     **/
+
+    public static int toIntWildcardMask(int mask) {
+        return ~toIntMask(mask);
+    }
+    /**
+     * Convert mask from CIDR  slash notation to  wildcardMask quartet form.
+     * <p/>
+     * Example: <code>'/24'</code> to <code>'0.0.0.255'</code>
+     *
+     * @param mask Mask in CIDR notation
+     * @return Wildcard Mask in quartet form
+     **/
+
+    public static String toDecWildCardMask(int mask) {
+        return convertIpToQuartet(toIntWildcardMask(mask));
+    }
 
 }
