@@ -34,11 +34,14 @@ public class MaskFragment extends Fragment {
 
     private void updateResultView(int mask){
         try {
+            String netSize = String.valueOf(NetworkManager.findUsableHosts(mask));
+            if(mask ==32)
+                netSize = "NONE";
 
             mResMaskTextView.setText(NetworkManager.toDecMask(mask));
             mRsWildcardMaskTextView.setText(NetworkManager.toDecWildCardMask(mask));
             mResMaskCIDRTextView.setText(getString(R.string.slash_mask, mask));
-            mResNetSizeTextView.setText(String.valueOf(NetworkManager.findUsableHosts(mask)));
+            mResNetSizeTextView.setText(netSize);
             mResMaskBinTextView.setText(NetworkManager.toBinOctets(NetworkManager.toIntMask(mask)));
             mResWildcardMaskBinTextView.setText(NetworkManager.toBinOctets(NetworkManager.toIntWildcardMask(mask)));
 
