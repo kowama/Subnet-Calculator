@@ -1,16 +1,15 @@
 package com.nimina.kowama.calculatornetadmin.fragments.dialog;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
-import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -19,11 +18,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nimina.kowama.calculatornetadmin.MainActivity;
@@ -32,20 +31,17 @@ import com.nimina.kowama.calculatornetadmin.R;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
-import static android.view.WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
-
 public class NetConfigDialog extends DialogFragment {
-    private HashMap<String, Integer> mSubNetsHashMap = new HashMap<>(); // [name: size]
+    private HashMap<String, Integer> mSubNetsHashMap = new LinkedHashMap<>(); // [name: size]
     private NetConfigDialog.NetConfigDialogListener mNetConfigDialogListener;
     private ListView mSubNetsHashMapListView;
-    private FloatingActionButton mAddSubNetFloatingActionButton;
 
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater layoutInflater = getActivity().getLayoutInflater();
-        final View view = layoutInflater.inflate(R.layout.net_config_dialog, null);
+        @SuppressLint("InflateParams") final View view = layoutInflater.inflate(R.layout.net_config_dialog, null);
 
         builder.setView(view)
                 .setTitle(R.string.label_net_conf_d_title)
@@ -59,7 +55,6 @@ public class NetConfigDialog extends DialogFragment {
                     public void onClick(DialogInterface dialog, int which) {
                         for (String key : mSubNetsHashMap.keySet()) {
                             if (mSubNetsHashMap.get(key) == null || mSubNetsHashMap.get(key) < 1) {
-                                // todo not working
                                 mSubNetsHashMap.clear();
                                 mNetConfigDialogListener.applyNetworksMap(mSubNetsHashMap);
                                 Toast.makeText(getActivity().getBaseContext(), "Network config not valid !", Toast.LENGTH_SHORT);
@@ -71,11 +66,11 @@ public class NetConfigDialog extends DialogFragment {
                     }
         });
 
-        /*** init ***/
+        /* init ***/
         mSubNetsHashMapListView        = view.findViewById(R.id.subNetHashMapListView);
-        mAddSubNetFloatingActionButton = view.findViewById(R.id.addSubNetFloatingActionButton);
+        FloatingActionButton mAddSubNetFloatingActionButton = view.findViewById(R.id.addSubNetFloatingActionButton);
 
-        /*** listener ***/
+        /* listener ***/
         mAddSubNetFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,7 +80,7 @@ public class NetConfigDialog extends DialogFragment {
         });
 
 
-        /**initial subnet **/
+        /*initial subnet **/
         mSubNetsHashMap.put("Network 1",null);
 
         updateSubNetsHashMapListView();
@@ -130,7 +125,7 @@ public class NetConfigDialog extends DialogFragment {
         private String[] mKeys;
         private int mResource;
 
-        public SubNetHashMapAdapter(Context context, int resource,HashMap<String, Integer> data){
+        SubNetHashMapAdapter(Context context, int resource, HashMap<String, Integer> data){
             mContext = context;
             mData    = data;
             mResource = resource;
@@ -152,21 +147,21 @@ public class NetConfigDialog extends DialogFragment {
             return 0;
         }
 
+        @SuppressLint("ViewHolder")
         @Override
         public View getView(int pos, View convertView, ViewGroup parent) {
+
             LayoutInflater inflater= LayoutInflater.from(mContext);
 
             convertView = inflater.inflate(mResource,parent,false) ;
             try {
-                final EditText subNetNameEditText       = convertView.findViewById(R.id.subNetNameEditText);
+                final TextView subNetNameEditText       = convertView.findViewById(R.id.subNetNameEditText);
                 final EditText subNetSizeEditText       = convertView.findViewById(R.id.subNetSizeEditText);
                 ImageButton delSubNetButton       = convertView.findViewById(R.id.delSubNetButton);
 
                 //show keyBoard on focus
                 InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.showSoftInput(subNetSizeEditText, InputMethodManager.SHOW_IMPLICIT);
-                imm.showSoftInput(subNetNameEditText,InputMethodManager.SHOW_IMPLICIT);
-
 
                 final String name = mKeys[pos];
                 final Integer size = getItem(pos);
@@ -176,7 +171,7 @@ public class NetConfigDialog extends DialogFragment {
                     subNetSizeEditText.setText(String.valueOf(size));
                 }
 
-                /** Listener **/
+                /* Listener **/
                 subNetNameEditText.addTextChangedListener(new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -204,6 +199,7 @@ public class NetConfigDialog extends DialogFragment {
                     public void onTextChanged(CharSequence s, int start, int before, int count) {
                     }
 
+                    @SuppressLint("ShowToast")
                     @Override
                     public void afterTextChanged(Editable s) {
                         try {
@@ -215,7 +211,7 @@ public class NetConfigDialog extends DialogFragment {
                                 subNetSizeEditText.setTextColor(Color.RED);
                             }
 
-                        }catch (NumberFormatException  e){
+                        }catch (NumberFormatException ignored){
 
                         }catch (Exception e){
                             Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_SHORT);

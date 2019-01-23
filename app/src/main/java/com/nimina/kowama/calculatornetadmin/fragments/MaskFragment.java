@@ -35,7 +35,7 @@ public class MaskFragment extends Fragment {
     private void updateResultView(int mask){
         try {
             String netSize = String.valueOf(NetworkManager.findUsableHosts(mask));
-            if(mask ==32)
+            if(mask > 30)
                 netSize = "NONE";
 
             mResMaskTextView.setText(NetworkManager.toDecMask(mask));

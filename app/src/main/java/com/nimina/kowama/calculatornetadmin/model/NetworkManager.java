@@ -286,10 +286,10 @@ public class NetworkManager {
    public static String toBinOctets(int address){
         int allOne = -1;
         String binAddress =  String.format("%32s", Integer.toBinaryString(address & allOne)).replace(' ', '0');
-        String  octets[] = { binAddress.substring(0,7),
-                binAddress.substring(8,15),
-                binAddress.substring(16,23),
-                binAddress.substring(24,31)};
+        String  octets[] = { binAddress.substring(0,8),
+                binAddress.substring(8,16),
+                binAddress.substring(16,24),
+                binAddress.substring(24,32)};
 
         return  octets[0]+"."+octets[1]+"."+octets[2]+"."+octets[3];
    }

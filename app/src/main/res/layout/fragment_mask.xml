@@ -154,7 +154,7 @@
                 android:layout_column="2"
                 android:layout_gravity="fill"
                 android:layout_marginStart="20dp"
-                android:textSize="12sp"
+                android:textSize="10sp"
                 android:minEms="10" />
         </TableRow>
 
@@ -177,7 +177,7 @@
                 android:layout_column="2"
                 android:layout_gravity="fill"
                 android:layout_marginStart="20dp"
-                android:textSize="12sp"
+                android:textSize="10sp"
                 android:minEms="10" />
         </TableRow>
 
