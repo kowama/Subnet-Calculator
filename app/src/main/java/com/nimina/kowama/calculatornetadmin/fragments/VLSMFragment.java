@@ -251,7 +251,6 @@ public class VLSMFragment extends Fragment implements NetConfigDialog.NetConfigD
         mResultListView.setVisibility(View.VISIBLE);
 
     }
-
     private class SubnetResultAdapter extends ArrayAdapter<NetworkManager.Subnet>{
         private Context mContext;
         private int mResource;
