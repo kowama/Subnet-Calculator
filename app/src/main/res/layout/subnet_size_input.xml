@@ -22,12 +22,12 @@
             android:id="@+id/subNetSizeEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:minEms="3"
-            android:maxLength="10"
-            android:hint="@string/hint_net_size"
             android:layout_column="2"
-            android:textSize="14sp"
-            android:inputType="numberDecimal" />
+            android:hint="@string/hint_net_size"
+            android:inputType="number"
+            android:maxLength="10"
+            android:minEms="3"
+            android:textSize="14sp" />
 
         <ImageButton
             android:id="@+id/delSubNetButton"
