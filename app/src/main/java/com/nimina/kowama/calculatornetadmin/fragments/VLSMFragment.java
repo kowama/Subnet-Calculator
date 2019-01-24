@@ -9,8 +9,10 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.Html;
+import android.text.Selection;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,8 +71,9 @@ public class VLSMFragment extends Fragment implements NetConfigDialog.NetConfigD
     }
     private void setListenerOnEditableViews(View rootView){
         /* ip Part A.B.C.D EditTextListener */
-        for (final EditText ipPartEditText : mIpAddressEditText)
-            ipPartEditText.addTextChangedListener(new TextWatcher() {
+        for (int i=0; i<mIpAddressEditText.length; i++) {
+            final int finalI = i;
+            mIpAddressEditText[i].addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -78,6 +81,10 @@ public class VLSMFragment extends Fragment implements NetConfigDialog.NetConfigD
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    /*move cursor when reach 3 char*/
+                    if (s.length() >=3){
+                        moveCursorToNext(finalI);
+                    }
 
                 }
 
@@ -86,10 +93,10 @@ public class VLSMFragment extends Fragment implements NetConfigDialog.NetConfigD
                     try {
                         if(s.length() >0){
                             if (s.length()>0 &&Integer.parseInt(s.toString()) < 0 || Integer.parseInt(s.toString()) > 255){
-                                ipPartEditText.setTextColor(Color.RED);
+                                mIpAddressEditText[finalI].setTextColor(Color.RED);
                             }
                             else{
-                                ipPartEditText.setTextColor(Color.BLACK);
+                                mIpAddressEditText[finalI].setTextColor(Color.BLACK);
                                 //OK
                             }
                         }
@@ -103,6 +110,18 @@ public class VLSMFragment extends Fragment implements NetConfigDialog.NetConfigD
 
                 }
             });
+
+            /*move cursor when dot pressed*/
+            mIpAddressEditText[i].setOnKeyListener(new View.OnKeyListener() {
+                @Override
+                public boolean onKey(View v, int keyCode, KeyEvent event) {
+                    if (keyCode == KeyEvent.KEYCODE_NUMPAD_DOT) {
+                        moveCursorToNext(finalI);
+                    }
+                    return false;
+                }
+            });
+        }
         /*ip Mask /xx EditTextListener */
 
         mIpMaskEditText.addTextChangedListener(new TextWatcher() {
@@ -188,14 +207,12 @@ public class VLSMFragment extends Fragment implements NetConfigDialog.NetConfigD
             }
         });
     }
-
     private void openNetConfigDialog(){
         NetConfigDialog netConfigDialog = new NetConfigDialog();
         assert getFragmentManager() != null;
         netConfigDialog.show(getFragmentManager(),getString(R.string.net_conf_dialog));
         netConfigDialog.setTargetFragment(VLSMFragment.this,1);
     }
-
     private void clearAllViews(){
         for (final EditText ipPartEditText : mIpAddressEditText){
             ipPartEditText.setText("");
@@ -208,7 +225,16 @@ public class VLSMFragment extends Fragment implements NetConfigDialog.NetConfigD
                 .setAction("Action", null).show();
         mResultListView.setVisibility(View.INVISIBLE);
     }
+    private void moveCursorToNext(int currentIndex){
+        EditText next;
+        if (currentIndex+1 < mIpAddressEditText.length)
+            next = mIpAddressEditText[currentIndex+1];
+        else
+            next = mIpMaskEditText;
 
+        Selection.setSelection(next.getText(), next.getSelectionStart());
+        next.requestFocus();
+    }
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -216,7 +242,6 @@ public class VLSMFragment extends Fragment implements NetConfigDialog.NetConfigD
         initViews(rootView);
         return rootView;
     }
-
     @Override
     public void applyNetworksMap(HashMap<String, Integer> subNetsMap) {
         mSubNetsMap     = subNetsMap;
