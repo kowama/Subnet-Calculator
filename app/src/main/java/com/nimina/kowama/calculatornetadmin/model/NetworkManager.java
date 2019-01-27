@@ -8,13 +8,13 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
  * @author Kowama
  */
 
 
 public class NetworkManager {
-    public static  class Subnet {
+    //===intern utility class
+    public static class Subnet {
         public String name;
         public int neededSize;
         public int allocatedSize;
@@ -26,11 +26,12 @@ public class NetworkManager {
         public String range;
         public String broadcast;
 
-        public Subnet(){
+        public Subnet() {
 
         }
-        public Subnet(String netAddress) throws IllegalArgumentException{
-            if(!checkIfValidNetworkAddress(netAddress)){
+
+        public Subnet(String netAddress) throws IllegalArgumentException {
+            if (!checkIfValidNetworkAddress(netAddress)) {
                 throw new IllegalArgumentException("netAddress not valid");
             }
             this.name = "A";
@@ -47,36 +48,36 @@ public class NetworkManager {
 
         }
     }
+
+    //=============public class API==================
+
     /**
      * Check if a IP address is a valid network address.
      *
      * @param netAddress String CIDR notation
      *                   exemple : 192.168.100.0/24
-     * @return  boolean
+     * @return boolean
      */
-    public static boolean checkIfValidNetworkAddress(String netAddress){
+    public static boolean checkIfValidNetworkAddress(String netAddress) {
         String[] ipPart = netAddress.split("/");
-        /**iPart[0]  =  A.B.C.D
+        /*iPart[0]  =  A.B.C.D
          * ipPart[1] =  mask
          */
-        if(ipPart.length !=2){
+        if (ipPart.length != 2) {
             return false;
         }
         String[] ipOctets = ipPart[0].split("\\.");
-        if(ipOctets.length != 4){
+        if (ipOctets.length != 4) {
             return false;
         }
 
-        for (String octet : ipOctets){
-            if (Integer.parseInt(octet)<0 || Integer.parseInt(octet)>255){
+        for (String octet : ipOctets) {
+            if (Integer.parseInt(octet) < 0 || Integer.parseInt(octet) > 255) {
                 return false;
             }
         }
-        if(Integer.parseInt(ipPart[1]) < 0 || Integer.parseInt(ipPart[1]) > 32 ){
-            return false;
-        }
-
-        return true;
+        //return true if the last test is true
+        return Integer.parseInt(ipPart[1]) >= 0 && Integer.parseInt(ipPart[1]) <= 32;
     }
 
 
@@ -84,7 +85,7 @@ public class NetworkManager {
      * Calculate VLSM.
      *
      * @param majorNetwork Major network
-     * @param subnets A map of required subnets
+     * @param subnets      A map of required subnets
      * @return A list of output subnets
      */
     public static List<Subnet> calcVLSM(String majorNetwork, Map<String, Integer> subnets) {
@@ -92,7 +93,7 @@ public class NetworkManager {
         List<Subnet> output = new ArrayList<>();
         int currentIp = findFirstIp(majorNetwork);
 
-        for (String key : sortedSubnets.keySet()) {  // for all subnets
+        for (String key : sortedSubnets.keySet()) {  // for all subNets
             Subnet subnet = new Subnet();
 
             subnet.name = key;
@@ -127,7 +128,7 @@ public class NetworkManager {
      * @param map Map
      * @return Sorted Map
      */
-    public static Map<String, Integer> sortMap(Map<String, Integer> map) {
+    private static Map<String, Integer> sortMap(Map<String, Integer> map) {
         List<Map.Entry<String, Integer>> entries = new ArrayList<>(map.entrySet());
         Collections.sort(entries, new Comparator<Map.Entry<String, Integer>>() {
             @Override
@@ -153,7 +154,7 @@ public class NetworkManager {
      * @return A single integer that stores IP address binary string
      */
     public static int convertQuartetToBinaryString(String ipAddress) {
-        String[] ip = ipAddress.split("\\.|/");
+        String[] ip = ipAddress.split("[./]");
 
         int octet1 = Integer.parseInt(ip[0]);
         int octet2 = Integer.parseInt(ip[1]);
@@ -197,9 +198,8 @@ public class NetworkManager {
         int offset = Integer.SIZE - mask;
 
         int majorAddress = convertQuartetToBinaryString(majorNetwork);
-        int firstIp = (majorAddress >> offset) << offset;
-
-        return firstIp;
+        //return firstIp
+        return  (majorAddress >> offset) << offset;
     }
 
     /**
@@ -209,6 +209,9 @@ public class NetworkManager {
      * @return Mask
      */
     public static int calcMask(int neededSize) {
+        if(isPowerOfTwo(neededSize +1)){
+            neededSize+=1;
+        }
         int highestBit = Integer.highestOneBit(neededSize);
         int position = (int) (Math.log(highestBit) / Math.log(2));
         return Integer.SIZE - (position + 1);   // +1 because position starts with 0
@@ -228,7 +231,7 @@ public class NetworkManager {
      * Convert mask from CIDR \slash  notation to integer form mask
      * <p/>
      *
-     * @param mask  Mask in CIDR \slash notation
+     * @param mask Mask in CIDR \slash notation
      * @return Mask in quartet  integer form
      */
     public static int toIntMask(int mask) {
@@ -236,9 +239,8 @@ public class NetworkManager {
             return 0;
         }
         int allOne = -1;    // '255.255.255.255'
-        int shifted = allOne << (Integer.SIZE - mask);
-
-        return shifted;
+        //return shifted
+        return allOne << (Integer.SIZE - mask);
     }
 
     /**
@@ -255,6 +257,7 @@ public class NetworkManager {
 
     /**
      * Convert mask from CIDR  slash notation to  wildcardMask int form.
+     *
      * @param mask Mask in CIDR notation
      * @return Wildcard Mask integer form
      **/
@@ -283,15 +286,26 @@ public class NetworkManager {
      * @param address ip address in int form
      * @return Wildcard Mask in quartet form
      **/
-   public static String toBinOctets(int address){
+    public static String toBinOctets(int address) {
         int allOne = -1;
-        String binAddress =  String.format("%32s", Integer.toBinaryString(address & allOne)).replace(' ', '0');
-        String  octets[] = { binAddress.substring(0,8),
-                binAddress.substring(8,16),
-                binAddress.substring(16,24),
-                binAddress.substring(24,32)};
+        String binAddress = String.format("%32s", Integer.toBinaryString(address & allOne)).replace(' ', '0');
+        String octets[] = {binAddress.substring(0, 8),
+                binAddress.substring(8, 16),
+                binAddress.substring(16, 24),
+                binAddress.substring(24, 32)};
 
-        return  octets[0]+"."+octets[1]+"."+octets[2]+"."+octets[3];
-   }
+        return octets[0] + "." + octets[1] + "." + octets[2] + "." + octets[3];
+    }
+
+
+    //==private Helper Methods
+    private static boolean isPowerOfTwo(int n) {
+        return n != 0 && ((n & (n - 1)) == 0);
+    }
+
+    //==constructor private
+    private NetworkManager() {
+
+    }
 
 }
