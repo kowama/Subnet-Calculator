@@ -36,5 +36,13 @@
     <string name="mask_cidr">Mask CIDR:</string>
     <string name="slash_mask">/%1$d</string>
     <string name="label_subnet_wildcard_mask">Wildcard Mask:</string>
+    <string name="action_about">about</string>
+    <string name="action_ipv4">IPv4</string>
+    <string name="action_vlsm">VLSM</string>
+
+    <string name="ipv4_url">https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr_ipv4/configuration/xe-3s/ipv4-xe-3s-book/configuring_ipv4_addresses.html</string>
+    <string name="vlsm_url">https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13788-3.html</string>
+    <string name="copyright"> copyright\n  &lt; kowama 2019>\n all right reserved</string>
+    <string name="about">app developed by kowama</string>
 
 </resources>

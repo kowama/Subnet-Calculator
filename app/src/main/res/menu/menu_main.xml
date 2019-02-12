@@ -3,8 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.nimina.kowama.calculatornetadmin.MainActivity">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_IPv4"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:title="@string/action_ipv4"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_vslm"
+        android:orderInCategory="100"
+        android:title="@string/action_vlsm"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_about"
+        android:orderInCategory="100"
+        android:title="@string/action_about"
         app:showAsAction="never" />
 </menu>
