@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">C for NetAdmin</string>
+    <string name="app_name">IP Subnet Calc</string>
     <string name="tab_text_1">Subnet\nCalculator</string>
     <string name="tab_text_2">VLSM\nCalculator</string>
     <string name="tab_text_3">Mask\nCalculator</string>
