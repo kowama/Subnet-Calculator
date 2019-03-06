@@ -7,9 +7,9 @@ Link on  [Google Playstore](https://play.google.com/store/apps/details?id=com.ni
 
 **Subnet Calculculator to make network admin work more easier**
 ### Features
-Give revelent information about each network for configuration
-Suport of VLSM and CIDR
-***clean and easy to use***
+- Give revelent information about each network for configuration
+- Suport of VLSM and CIDR
+- ***clean and easy to use***
 
 ## Screenshots
 **Subnet Information Calculator**
