@@ -27,5 +27,5 @@ Suport of VLSM and CIDR
 
 ## License
 
-This project is licensed under the MIT License - see the  [for more details](https://en.wikipedia.org/wiki/MIT_License)
+This project is licensed under the MIT License - see [for more details](https://en.wikipedia.org/wiki/MIT_License)
 
