@@ -12,19 +12,21 @@ Link [on Google Playstore](https://play.google.com/store/apps/details?id=com.nim
 - ***clean and easy to use***
 
 ## Screenshots
-**Subnet Information Calculator**<br/>
+<b>Subnet Information Calculator</b><br/>
 <img src="https://raw.githubusercontent.com/kowama/Subnet-Calculator/master/screenshots/Screenshot_1.png" width="220" /><br/>
-
-##### VLSM Subneting Calculator 
+<br/>
+<b>VLSM Subneting Calculator</b>
+<br/>
 <img src="https://raw.githubusercontent.com/kowama/Subnet-Calculator/master/screenshots/Screenshot_2.png" width="220" />
-
-###### VLSM result display
-
+<br/>
+<b>VLSM result display</b>
+<br/>
 <img src="https://raw.githubusercontent.com/kowama/Subnet-Calculator/master/screenshots/Screenshot_3.png" width="220" />
 <br/>
 <b>Network Mask Information Calculator</b>
+<br/>
 <img src="https://raw.githubusercontent.com/kowama/Subnet-Calculator/master/screenshots/Screenshot_4.png" width="220" />
-
+<br/>
 ## License
 
 This project is licensed under the MIT License - see [for more details](https://en.wikipedia.org/wiki/MIT_License)
