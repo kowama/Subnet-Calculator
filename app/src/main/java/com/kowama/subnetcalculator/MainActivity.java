@@ -1,4 +1,4 @@
-package com.nimina.kowama.calculatornetadmin;
+package com.kowama.subnetcalculator;
 
 import android.content.Context;
 import android.content.Intent;

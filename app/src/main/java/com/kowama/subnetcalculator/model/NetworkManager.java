@@ -1,4 +1,4 @@
-package com.nimina.kowama.calculatornetadmin.model;
+package com.kowama.subnetcalculator.model;
 
 import java.util.ArrayList;
 import java.util.Collections;

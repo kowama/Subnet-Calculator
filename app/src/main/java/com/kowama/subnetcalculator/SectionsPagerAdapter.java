@@ -1,12 +1,12 @@
-package com.nimina.kowama.calculatornetadmin;
+package com.kowama.subnetcalculator;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.nimina.kowama.calculatornetadmin.fragments.MaskFragment;
-import com.nimina.kowama.calculatornetadmin.fragments.SubnetFragment;
-import com.nimina.kowama.calculatornetadmin.fragments.VLSMFragment;
+import com.kowama.subnetcalculator.fragments.MaskFragment;
+import com.kowama.subnetcalculator.fragments.SubnetFragment;
+import com.kowama.subnetcalculator.fragments.VLSMFragment;
 
 /**
  * A {@link FragmentPagerAdapter} that returns a fragment corresponding to

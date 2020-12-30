@@ -1,4 +1,4 @@
-package com.nimina.kowama.calculatornetadmin.fragments;
+package com.kowama.subnetcalculator.fragments;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -20,8 +20,8 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.nimina.kowama.calculatornetadmin.R;
-import com.nimina.kowama.calculatornetadmin.model.NetworkManager;
+import com.kowama.subnetcalculator.R;
+import com.kowama.subnetcalculator.model.NetworkManager;
 
 public class SubnetFragment extends Fragment {
     private EditText[] mIpAddressEditText;
@@ -72,12 +72,17 @@ public class SubnetFragment extends Fragment {
             mIpAddressEditText[i].addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                    String ss = s.toString().toLowerCase();
+                    Log.d("Debug", "last char: " + ss);
+                    if (s.toString().endsWith(".")){
+                        moveCursorToNext(finalI);
+                    }
 
                 }
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    /*move cursor when reach 3 char*/
+                    /*move cursor when reach 3 char or press (dot)*/
                     if (s.length() >= 3) {
                         moveCursorToNext(finalI);
                     }
@@ -85,6 +90,8 @@ public class SubnetFragment extends Fragment {
 
                 @Override
                 public void afterTextChanged(Editable s) {
+                    for(int i = 0; i<s.length(); i++){
+                    }
                     if (s.length() > 0) {
                         try {
 

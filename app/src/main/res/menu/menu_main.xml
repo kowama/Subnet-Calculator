@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.nimina.kowama.calculatornetadmin.MainActivity">
+    tools:context="com.kowama.subnetcalculator.MainActivity">
     <item
         android:id="@+id/action_IPv4"
         android:orderInCategory="100"

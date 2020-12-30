@@ -67,6 +67,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        android:visibility="invisible"
+        app:srcCompat="@android:drawable/ic_dialog_email"
+        android:contentDescription="@string/homefab" />
 
 </android.support.design.widget.CoordinatorLayout>

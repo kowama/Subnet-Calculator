@@ -1,4 +1,4 @@
-package com.nimina.kowama.calculatornetadmin.fragments;
+package com.kowama.subnetcalculator.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -14,8 +14,8 @@ import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.nimina.kowama.calculatornetadmin.R;
-import com.nimina.kowama.calculatornetadmin.model.NetworkManager;
+import com.kowama.subnetcalculator.R;
+import com.kowama.subnetcalculator.model.NetworkManager;
 
 import java.util.ArrayList;
 import java.util.List;

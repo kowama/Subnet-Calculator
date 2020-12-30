@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">IP Subnet Calc</string>
+    <string name="app_name">IP Subnet Calculator</string>
     <string name="tab_text_1">Subnet\nCalculator</string>
     <string name="tab_text_2">VLSM\nCalculator</string>
     <string name="tab_text_3">Mask\nCalculator</string>
@@ -44,5 +44,7 @@
     <string name="vlsm_url">https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13788-3.html</string>
     <string name="copyright"> copyright\n  &lt; kowama 2019>\n all right reserved</string>
     <string name="about">app developed by kowama</string>
+    <string name="add_new_network">Add New Network</string>
+    <string name="homefab">TODO</string>
 
 </resources>

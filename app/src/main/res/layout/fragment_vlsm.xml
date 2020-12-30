@@ -110,7 +110,8 @@
             android:layout_weight="1"
             android:contentDescription="@string/clear_button"
             android:minWidth="80dp"
-            android:src="@drawable/ic_delete_blue_24dp" />
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:src="@drawable/ic_delete_24dp" />
 
     </LinearLayout>
 

@@ -31,15 +31,16 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="24dp"
-        app:layout_constraintVertical_weight="20"
         android:maxWidth="48dp"
-        app:backgroundTint="@color/colorAccent"
+        android:src="@drawable/ic_add_circle_24"
+        app:backgroundTint="@color/colorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.106"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/subNetHashMapListView"
         app:layout_constraintVertical_bias="0.836"
-        app:srcCompat="@drawable/ic_add_green_48" />
+        app:layout_constraintVertical_weight="20"
+        android:contentDescription="@string/add_new_network" />
 
 </android.support.constraint.ConstraintLayout>

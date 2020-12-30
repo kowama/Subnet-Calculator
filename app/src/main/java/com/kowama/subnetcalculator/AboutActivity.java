@@ -1,4 +1,4 @@
-package com.nimina.kowama.calculatornetadmin;
+package com.kowama.subnetcalculator;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

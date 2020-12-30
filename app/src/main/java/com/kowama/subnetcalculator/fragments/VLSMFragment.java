@@ -1,4 +1,4 @@
-package com.nimina.kowama.calculatornetadmin.fragments;
+package com.kowama.subnetcalculator.fragments;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -25,10 +25,10 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.nimina.kowama.calculatornetadmin.MainActivity;
-import com.nimina.kowama.calculatornetadmin.R;
-import com.nimina.kowama.calculatornetadmin.model.NetworkManager;
-import com.nimina.kowama.calculatornetadmin.fragments.dialog.NetConfigDialog;
+import com.kowama.subnetcalculator.MainActivity;
+import com.kowama.subnetcalculator.R;
+import com.kowama.subnetcalculator.model.NetworkManager;
+import com.kowama.subnetcalculator.fragments.dialog.NetConfigDialog;
 
 import org.jetbrains.annotations.NotNull;
 

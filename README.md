@@ -3,7 +3,7 @@
 # IP Subnet Calculator
 <img src="https://raw.githubusercontent.com/kowama/Subnet-Calculator/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" />
 
-Link [on Google Playstore](https://play.google.com/store/apps/details?id=com.nimina.kowama.calculatornetadmin "on Google Playstore")
+Link [on Google Playstore](https://play.google.com/store/apps/details?id=com.kowama.calculatornetadmin "on Google Playstore")
 
 **Subnet Calculculator to make network admin work more easier**
 ### Features

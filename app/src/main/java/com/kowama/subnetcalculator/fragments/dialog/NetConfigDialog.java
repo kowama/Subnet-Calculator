@@ -1,4 +1,4 @@
-package com.nimina.kowama.calculatornetadmin.fragments.dialog;
+package com.kowama.subnetcalculator.fragments.dialog;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -25,8 +25,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.nimina.kowama.calculatornetadmin.MainActivity;
-import com.nimina.kowama.calculatornetadmin.R;
+import com.kowama.subnetcalculator.MainActivity;
+import com.kowama.subnetcalculator.R;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
